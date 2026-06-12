@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — Practical AI Guidance for Social Housing | HAILIE</title>
+  <meta name="description" content="Housing-specific guides, checklists, templates and event recordings from HAILIE. Find governance, IT, tenant trust, use cases and small provider resources.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="Images/hailie-logo-small.png">
+  <link rel="apple-touch-icon" href="Images/hailie-logo-big.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="HAILIE home">
+        <img src="Images/hailie-logo-big.png" alt="HAILIE — Housing AI Leadership and Implementation Exchange">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-page="home">Home</a>
+        <a href="for-leaders.html" class="nav-link" data-page="for-leaders">For Leaders</a>
+        <div class="nav-item has-dropdown">
+          <a href="resources.html" class="nav-link active" data-page="resources" aria-current="page">Resources <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></a>
+          <nav class="nav-dropdown" aria-label="Resources pages">
+            <a href="resources.html#start-here" class="nav-dropdown-link">Start Here</a>
+            <a href="resources.html#governance" class="nav-dropdown-link">Governance and Assurance</a>
+            <a href="resources.html#it-digital-data" class="nav-dropdown-link">IT, Digital and Data</a>
+            <a href="resources.html#toolkits" class="nav-dropdown-link">AI Toolkits and Templates</a>
+            <a href="resources.html#tenant-ethics" class="nav-dropdown-link">Tenant Impact and Ethics</a>
+            <a href="resources.html#use-cases-benefits" class="nav-dropdown-link">Role-Based AI Use Cases</a>
+            <a href="resources.html#small-providers" class="nav-dropdown-link">Small Provider Resources</a>
+            <a href="resources.html#events-recordings" class="nav-dropdown-link">Events and Recordings</a>
+            <a href="resources.html#recommended-reading" class="nav-dropdown-link">Recommended Reading</a>
+          </nav>
+        </div>
+        <a href="events.html" class="nav-link" data-page="events">Events</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="join.html" class="btn btn-primary" style="margin-left:8px;">Join the Exchange</a>
+      </div>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer">
+        <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <div class="nav-drawer-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="for-leaders.html" class="nav-link">For Leaders</a>
+      <a href="resources.html" class="nav-link active">Resources</a>
+      <div class="nav-drawer-submenu">
+        <a href="resources.html#start-here" class="nav-link">Start Here</a>
+        <a href="resources.html#governance" class="nav-link">Governance and Assurance</a>
+        <a href="resources.html#it-digital-data" class="nav-link">IT, Digital and Data</a>
+        <a href="resources.html#toolkits" class="nav-link">AI Toolkits and Templates</a>
+        <a href="resources.html#tenant-ethics" class="nav-link">Tenant Impact and Ethics</a>
+        <a href="resources.html#use-cases-benefits" class="nav-link">Role-Based AI Use Cases</a>
+        <a href="resources.html#small-providers" class="nav-link">Small Provider Resources</a>
+        <a href="resources.html#events-recordings" class="nav-link">Events and Recordings</a>
+        <a href="resources.html#recommended-reading" class="nav-link">Recommended Reading</a>
+      </div>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="join.html" class="btn btn-primary" style="width:100%;justify-content:center;">Join the Exchange</a>
+  </div>
+
+  <main id="main">
+
+    <!-- ===================== PAGE HERO ===================== -->
+    <div class="page-hero">
+      <div class="container">
+        <span class="overline">HAILIE Resources</span>
+        <h1>Practical AI guidance for social housing</h1>
+        <p>Guides, checklists, templates and recordings from HAILIE and the housing sector — all free to use and reuse.</p>
+      </div>
+    </div>
+
+    <!-- ===================== RESOURCE NAV ===================== -->
+    <div style="background:var(--color-bg);border-bottom:1px solid var(--color-border);position:sticky;top:var(--nav-height);z-index:50;">
+      <div class="container">
+        <nav aria-label="Resource categories" style="display:flex;gap:var(--space-2);overflow-x:auto;padding-block:var(--space-3);-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+          <a href="#start-here" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Start Here</a>
+          <a href="#governance" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Governance</a>
+          <a href="#it-digital-data" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">IT, Digital &amp; Data</a>
+          <a href="#toolkits" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Toolkits</a>
+          <a href="#tenant-ethics" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Tenant &amp; Ethics</a>
+          <a href="#use-cases-benefits" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Use Cases</a>
+          <a href="#small-providers" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Small Providers</a>
+          <a href="#events-recordings" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Events</a>
+          <a href="#recommended-reading" class="resource-tab-link" style="white-space:nowrap;font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);padding:var(--space-2) var(--space-3);border-radius:6px;text-decoration:none;transition:background 0.15s,color 0.15s;">Reading</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- ===================== START HERE ===================== -->
+      <section id="start-here" class="resource-section" aria-labelledby="start-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+          </div>
+          <h2 id="start-heading">Start Here</h2>
+        </div>
+        <p style="margin-bottom:var(--space-6);max-width:65ch;color:var(--color-text-muted);">New to HAILIE? Find your route below based on your role and priorities.</p>
+        <div class="start-here-grid">
+          <div class="start-card">
+            <h3>Boards and Executive Leaders</h3>
+            <ul>
+              <li><a href="resources/board-checklist.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Board-Ready AI Assurance Checklist</a></li>
+              <li><a href="resources/first-90-days.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>First 90 Days Action Plan</a></li>
+              <li><a href="resources/governance-board-pack.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>AI and Governance Board Pack</a></li>
+              <li><a href="for-leaders.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>For Leaders page</a></li>
+            </ul>
+          </div>
+          <div class="start-card">
+            <h3>IT, Digital and Data Leaders</h3>
+            <ul>
+              <li><a href="resources/it-director-guide.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>AI for IT Directors</a></li>
+              <li><a href="resources/safe-use-patterns.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Safe-Use Patterns for AI Assistants</a></li>
+              <li><a href="resources/vendor-checklist.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Vendor AI Evaluation Checklist</a></li>
+              <li><a href="resources/experiment-template.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>AI Experiment Template</a></li>
+            </ul>
+          </div>
+          <div class="start-card">
+            <h3>Role-Based AI Use Cases</h3>
+            <ul>
+              <li><a href="resources/role-use-cases.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Role-Based AI Use Cases</a></li>
+              <li><a href="resources/service-benefits.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Service Area Benefits Examples</a></li>
+              <li><a href="resources/tsm-insights.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>HAILIE TSM Insights Dashboard</a></li>
+              <li><a href="events.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Events and recordings</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== GOVERNANCE ===================== -->
+      <section id="governance" class="resource-section" aria-labelledby="governance-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <h2 id="governance-heading">Governance and Assurance</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="resources/board-checklist.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--governance">Governance</span><span class="tag">Checklist</span></div>
+            <h3>Board-Ready AI Assurance Checklist</h3>
+            <p class="resource-card-desc">Ten areas with evidence questions, red flags and a RAG rating guide. Used before approving new AI use cases, enabling supplier AI or rolling out AI assistants.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Boards · CEO · Governance</span>
+              <span class="resource-card-link">Read checklist <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/dpia-template.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--governance">Data Protection</span><span class="tag">Template</span></div>
+            <h3>Plain-Language DPIA and AI Risk Template</h3>
+            <p class="resource-card-desc">Decide whether an AI use case needs a DPIA and record main risks in plain English. Practical starting point for governance, risk and data protection leads.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Governance · Data Protection · IT</span>
+              <span class="resource-card-link">View template <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/governance-board-pack.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--governance">Board Pack</span><span class="tag">Discussion</span></div>
+            <h3>AI and Governance Board Pack</h3>
+            <p class="resource-card-desc">A boardroom discussion pack with three scenarios, governance questions and a five-year view of how AI will reshape social housing governance.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Boards · Audit and Risk</span>
+              <span class="resource-card-link">View board pack <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/first-90-days.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--governance">Leadership</span><span class="tag">Guide</span></div>
+            <h3>First 90 Days AI Leadership Action Plan</h3>
+            <p class="resource-card-desc">Month-by-month action plan for leaders moving from concern to governed AI experimentation, with a first board report template.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">CEO · Executive Teams</span>
+              <span class="resource-card-link">View action plan <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== IT DIGITAL DATA ===================== -->
+      <section id="it-digital-data" class="resource-section" aria-labelledby="it-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+          </div>
+          <h2 id="it-heading">IT, Digital and Data</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="resources/it-director-guide.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--it">IT &amp; Digital</span><span class="tag">Guide</span></div>
+            <h3>AI for IT Directors in Housing</h3>
+            <p class="resource-card-desc">Five priorities for IT and digital leaders: manage risk, build data foundations, understand vendor AI roadmaps, run a community of practice and engage with peers.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT Directors · CTO · Data leads</span>
+              <span class="resource-card-link">Read guide <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/tsm-insights.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--it">Data and AI</span><span class="tag">Dashboard</span></div>
+            <h3>HAILIE TSM Insights Dashboard</h3>
+            <p class="resource-card-desc">Compare published Tenant Satisfaction Measures with similar providers and use rank, priority areas and prompts for board, data and service discussions.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Boards · Data leads · Service leaders</span>
+              <span class="resource-card-link">Read how to use it <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/safe-use-patterns.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--it">IT &amp; Digital</span><span class="tag">Toolkit</span></div>
+            <h3>Safe-Use Patterns for AI Assistants</h3>
+            <p class="resource-card-desc">Simple safe and unsafe patterns for using Copilot, ChatGPT, Gemini and Claude. Includes a staff rule of thumb and a prompt pattern for low-risk tasks.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT · Service teams · Staff</span>
+              <span class="resource-card-link">Read guide <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/vendor-checklist.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--it">Procurement</span><span class="tag">Checklist</span></div>
+            <h3>Vendor AI Evaluation Checklist</h3>
+            <p class="resource-card-desc">Ten areas to assess before enabling supplier AI — use case, data protection, accuracy, fairness, cyber, contract and exit. Ten questions for a supplier demo.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT · Procurement · Legal</span>
+              <span class="resource-card-link">Read checklist <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/dpia-template.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--it">Data Protection</span><span class="tag">Template</span></div>
+            <h3>Plain-Language DPIA and AI Risk Template</h3>
+            <p class="resource-card-desc">Practical starting point for deciding whether an AI use case needs a DPIA and recording the main risks — from quick screening through to full risk tracking.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT · Data Protection · Governance</span>
+              <span class="resource-card-link">View template <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== TOOLKITS ===================== -->
+      <section id="toolkits" class="resource-section" aria-labelledby="toolkits-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/></svg>
+          </div>
+          <h2 id="toolkits-heading">AI Toolkits and Templates</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="resources/experiment-template.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Template</span><span class="tag tag--it">Toolkit</span></div>
+            <h3>AI Experiment Template</h3>
+            <p class="resource-card-desc">A structured template for testing AI use cases safely — housing problem, data screen, human oversight, baseline measures and a decision framework. Includes a worked repairs triage example.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Service owners · IT · Change teams</span>
+              <span class="resource-card-link">View template <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/vendor-checklist.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Checklist</span><span class="tag tag--it">Procurement</span></div>
+            <h3>Vendor AI Evaluation Checklist</h3>
+            <p class="resource-card-desc">Use before enabling supplier AI features, buying AI-enabled products or accepting roadmap updates that introduce AI.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT · Procurement · Legal</span>
+              <span class="resource-card-link">Read checklist <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/dpia-template.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Template</span><span class="tag tag--governance">Data Protection</span></div>
+            <h3>Plain-Language DPIA Template</h3>
+            <p class="resource-card-desc">Quick screening through to full risk recording — covers lawful basis, automated decision-making, fairness, tenant impact and ICO guidance.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT · Governance · Data Protection</span>
+              <span class="resource-card-link">View template <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/safe-use-patterns.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Toolkit</span><span class="tag tag--it">Staff guidance</span></div>
+            <h3>Safe-Use Patterns for AI Assistants</h3>
+            <p class="resource-card-desc">Seven safe patterns, six uses that need extra care, a clear list of prohibited actions, and a prompt pattern for low-risk work.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All staff · IT · Managers</span>
+              <span class="resource-card-link">Read guide <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== TENANT IMPACT ===================== -->
+      <section id="tenant-ethics" class="resource-section" aria-labelledby="tenant-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+          </div>
+          <h2 id="tenant-heading">Tenant Impact and Ethics</h2>
+        </div>
+        <div class="resource-grid">
+
+          <a href="resources/safe-use-patterns.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--tenant">Ethics</span><span class="tag">Guide</span></div>
+            <h3>Safe-Use Patterns for AI Assistants</h3>
+            <p class="resource-card-desc">Clear guidance on what staff can and cannot do with AI tools — protecting tenant data, fairness and service quality.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All staff · Managers · IT</span>
+              <span class="resource-card-link">Read guide <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/dpia-template.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag tag--tenant">Data Protection</span><span class="tag">Template</span></div>
+            <h3>Plain-Language DPIA Template</h3>
+            <p class="resource-card-desc">Assess tenant impact, fairness, accessibility and individual rights before any AI pilot or rollout that touches personal data.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Governance · Data Protection</span>
+              <span class="resource-card-link">View template <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="events.html" class="resource-card resource-card--recording">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video Recording</span><span class="tag tag--tenant">Tenant</span></div>
+            <h3>AI and Tenants — HAILIE Session</h3>
+            <p class="resource-card-desc">Shakirah Akinwale leads a discussion on AI, tenants and trust in housing services. Recording available from November 2025.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Tenant Voice · Customer Experience</span>
+              <span class="resource-card-link">Watch recording <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== USE CASES ===================== -->
+      <section id="use-cases-benefits" class="resource-section" aria-labelledby="usecases-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          </div>
+          <h2 id="usecases-heading">Role-Based AI Use Cases</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="resources/role-use-cases.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Use Cases</span><span class="tag tag--tenant">Service</span></div>
+            <h3>Role-Based AI Use Cases</h3>
+            <p class="resource-card-desc">Short AI use cases by role — COO, Customer Experience, Assets, Governance, Finance, People, Tenant Voice, Change — with guardrails and measures for each.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Service leaders · Change teams</span>
+              <span class="resource-card-link">View use cases <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/service-benefits.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Benefits</span><span class="tag tag--tenant">Service</span></div>
+            <h3>Service Area Benefits Examples</h3>
+            <p class="resource-card-desc">Practical AI benefit examples across repairs, damp and mould, complaints, customer contact, allocations, tenancy sustainment, income, assets, tenant engagement and more.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">COO · Service leaders · Change</span>
+              <span class="resource-card-link">View benefits <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/tsm-insights.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Open artefact</span><span class="tag tag--tenant">Tenant services</span></div>
+            <h3>HAILIE TSM Insights Dashboard</h3>
+            <p class="resource-card-desc">Use published Tenant Satisfaction Measures to compare providers, spot areas for closer attention and prepare better local service questions.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Boards · Service leaders · Tenant voice</span>
+              <span class="resource-card-link">Read how to use it <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== SMALL PROVIDERS ===================== -->
+      <section id="small-providers" class="resource-section" aria-labelledby="small-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+          </div>
+          <h2 id="small-heading">Small Provider Resources</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="resources/small-provider-tips.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Small Providers</span><span class="tag">Guide</span></div>
+            <h3>Small Housing Provider AI Tips</h3>
+            <p class="resource-card-desc">Practical AI starting points for small registered providers with no internal IT team. From Anne Taylor (CEO, Churcher Thorngate Trust) and Guy Marshall (HAILIE Chair).</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Small providers · CEO</span>
+              <span class="resource-card-link">Read tips <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/safe-use-patterns.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Small Providers</span><span class="tag">Toolkit</span></div>
+            <h3>Safe-Use Patterns for AI Assistants</h3>
+            <p class="resource-card-desc">Simple rules for using AI tools safely without a specialist IT team — practical guidance for any size of organisation.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Small providers · All staff</span>
+              <span class="resource-card-link">Read guide <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+          <a href="resources/experiment-template.html" class="resource-card">
+            <div class="resource-card-tags"><span class="tag">Small Providers</span><span class="tag">Template</span></div>
+            <h3>AI Experiment Template</h3>
+            <p class="resource-card-desc">Start small and test safely — a structured template that works at any scale, with no specialist AI knowledge required.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Small providers · Service owners</span>
+              <span class="resource-card-link">View template <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </div>
+          </a>
+        </div>
+        <div class="callout callout--info" style="margin-top:var(--space-5);max-width:680px;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="color:var(--color-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+          <p>"It's not a money thing: if you want to do something, you can find a way to do it." — Anne Taylor, CEO, Churcher Thorngate Trust</p>
+        </div>
+      </section>
+
+      <!-- ===================== EVENTS ===================== -->
+      <section id="events-recordings" class="resource-section" aria-labelledby="eventresources-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg>
+          </div>
+          <h2 id="eventresources-heading">Events and Recordings</h2>
+        </div>
+        <div class="resource-grid">
+          <a href="https://www.youtube.com/watch?v=ujC5hKBDmEM&t=64s" class="resource-card resource-card--recording" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video</span><span class="tag tag--governance">Governance</span></div>
+            <h3>AI and Governance — October 2025</h3>
+            <p class="resource-card-desc">Short talks on AI governance in housing from Abi Rennison, Tom S, Claire P and others. Practical governance discussion from the HAILIE community.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Governance · Boards · IT</span>
+              <span class="resource-card-link">Watch on YouTube <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=RW-uscHGvzs" class="resource-card resource-card--recording" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video</span><span class="tag tag--tenant">Tenant</span></div>
+            <h3>AI and Tenants — November 2025</h3>
+            <p class="resource-card-desc">Shakirah Akinwale leads an exploration of AI's impact on tenants, trust and fairness in social housing services.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Tenant Voice · Customer Experience</span>
+              <span class="resource-card-link">Watch on YouTube <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=ufvjBuaWx1w" class="resource-card resource-card--recording" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video</span><span class="tag">Case Study</span></div>
+            <h3>Transforming Housing with AI — December 2025</h3>
+            <p class="resource-card-desc">Phil McCavish and Stephen Batley share practical examples and experiences of using AI to transform housing services.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">CEO · Service leaders · IT</span>
+              <span class="resource-card-link">Watch on YouTube <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=2wW14hIgY6A" class="resource-card resource-card--recording" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video</span><span class="tag">AI Review</span></div>
+            <h3>AI: 2025 and 2026 — January 2026</h3>
+            <p class="resource-card-desc">Carolina Padovezi de Oliveira and Guy Marshall review 2025 in AI for housing and what to watch in 2026.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All audiences</span>
+              <span class="resource-card-link">Watch on YouTube <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://youtu.be/0HKcxWHxXw0?si=nN0GLVTAn3v1cnwp" class="resource-card resource-card--recording" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video</span><span class="tag">Hackathon</span></div>
+            <h3>Hackathon Lessons Learned — March 2026</h3>
+            <p class="resource-card-desc">Hackathon organisers share what worked, what didn't, and what the sector learned from HAILIE's first housing AI hackathon.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All audiences · Practitioners</span>
+              <span class="resource-card-link">Watch on YouTube <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://youtu.be/cwsmtJk_Jzs?si=ehHPXztnUUIovu_E" class="resource-card resource-card--recording" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-video-header" aria-hidden="true"><div class="resource-card-video-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <div class="resource-card-tags"><span class="tag tag--recording">Video</span><span class="tag">Roadmap</span></div>
+            <h3>Roadmap Launch — April 2026</h3>
+            <p class="resource-card-desc">HAILIE organisers present the community roadmap for 2026, outlining priorities and direction for responsible AI in social housing.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All audiences</span>
+              <span class="resource-card-link">Watch on YouTube <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+        </div>
+        <div style="margin-top:var(--space-5);">
+          <a href="events.html" class="btn btn-secondary">View all events and recordings</a>
+        </div>
+      </section>
+
+      <!-- ===================== RECOMMENDED READING ===================== -->
+      <section id="recommended-reading" class="resource-section" aria-labelledby="reading-heading">
+        <div class="resource-section-header">
+          <div class="resource-section-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+          </div>
+          <h2 id="reading-heading">Recommended Reading</h2>
+        </div>
+        <p style="margin-bottom:var(--space-5);max-width:65ch;color:var(--color-text-muted);">Curated external resources from authoritative sources — UK government guidance, regulators, research and sector commentary.</p>
+        <div class="resource-grid">
+          <a href="https://www.gov.uk/government/publications/ai-opportunities-action-plan/ai-opportunities-action-plan" class="resource-card" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-tags"><span class="tag">External</span><span class="tag tag--governance">Government</span></div>
+            <h3>AI Opportunities Action Plan</h3>
+            <p class="resource-card-desc">UK Government plan for AI adoption across the public and private sectors. Relevant context for housing sector strategy and investment decisions.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All audiences</span>
+              <span class="resource-card-link">Read report <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://bcn.co.uk/app/uploads/2025/08/Aspirations-and-Applications-of-AI-in-Social-Housing-2025.pdf" class="resource-card" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-tags"><span class="tag">External</span><span class="tag">Research</span></div>
+            <h3>Aspirations and Applications of AI in Social Housing 2025</h3>
+            <p class="resource-card-desc">Sector research on where housing providers are on their AI journey — aspirations, current adoption and barriers. BCN Group, 2025.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All audiences</span>
+              <span class="resource-card-link">Read report <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/" class="resource-card" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-tags"><span class="tag">External</span><span class="tag tag--governance">ICO</span></div>
+            <h3>ICO AI and Data Protection Guidance</h3>
+            <p class="resource-card-desc">Information Commissioner's Office guidance on AI and data protection — accountability, transparency, fairness, automated decision-making and the risk toolkit.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">IT · Governance · Data Protection</span>
+              <span class="resource-card-link">Read guidance <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://www.ncsc.gov.uk/cyber-governance-for-boards/toolkit" class="resource-card" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-tags"><span class="tag">External</span><span class="tag tag--governance">NCSC</span></div>
+            <h3>NCSC Cyber Security Toolkit for Boards</h3>
+            <p class="resource-card-desc">The National Cyber Security Centre's board-level cyber toolkit — helps boards govern cyber and AI risk without needing technical expertise.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Boards · IT · Governance</span>
+              <span class="resource-card-link">Read toolkit <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://promo.cymru/resource-articles/promo-cymru-ai-statement/" class="resource-card" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-tags"><span class="tag">External</span><span class="tag">Example</span></div>
+            <h3>Example AI Statement — Promo Cymru</h3>
+            <p class="resource-card-desc">An example of a published AI statement from an organisation using AI responsibly. Useful reference when drafting your own governance policy or transparency statement.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">Governance · Comms · All</span>
+              <span class="resource-card-link">View example <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+          <a href="https://www.oneusefulthing.org/p/using-ai-right-now-a-quick-guide" class="resource-card" target="_blank" rel="noopener noreferrer">
+            <div class="resource-card-tags"><span class="tag">External</span><span class="tag">Guide</span></div>
+            <h3>Using AI Right Now — Ethan Mollick</h3>
+            <p class="resource-card-desc">A practical guide to using AI tools effectively from Ethan Mollick at Wharton Business School. Accessible, evidence-based and regularly updated.</p>
+            <div class="resource-card-footer">
+              <span class="resource-card-audience">All audiences</span>
+              <span class="resource-card-link">Read guide <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </div><!-- /container -->
+
+    <!-- ===================== REQUEST A RESOURCE ===================== -->
+    <section class="section section--soft" aria-labelledby="request-resource-heading">
+      <div class="container" style="max-width:640px;text-align:center;">
+        <span class="overline">Missing something useful?</span>
+        <h2 id="request-resource-heading">Tell us what the sector needs next</h2>
+        <p style="margin-top:var(--space-4);color:var(--color-text-muted);">If a missing checklist, template, briefing or example would help your team make better decisions about Artificial Intelligence (AI), send us the idea. A good resource often begins as a practical question from a board pack, data meeting or service review. We use suggestions to decide what HAILIE should build and share next.</p>
+        <div style="margin-top:var(--space-6);">
+          <a href="mailto:guy@housingai.org" class="btn btn-primary">Suggest a resource</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="cta-section" aria-labelledby="resources-cta-heading">
+      <div class="container">
+        <h2 id="resources-cta-heading">Join the Exchange — access new resources as they are published</h2>
+        <p>Sign up for invites, summaries, recordings and briefings from HAILIE. Free. No sales pitches. Unsubscribe anytime.</p>
+        <div class="btn-group" style="justify-content:center;">
+          <a href="join.html" class="btn btn-white">Join the Exchange</a>
+        </div>
+        <p class="privacy-note">We respect your privacy and will not share your details.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="Images/hailie-logo-small.png" alt="HAILIE">
+            <span class="footer-logo-text">HAILIE</span>
+          </a>
+          <p class="footer-description">Housing AI Leadership &amp; Implementation Exchange — independent, vendor-neutral, built for housing.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="for-leaders.html">For Leaders</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="join.html">Join</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <h4 style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-bottom:var(--space-4);">Contact</h4>
+          <p>Questions or contributions:<br><a href="mailto:guy@housingai.org">guy@housingai.org</a></p>
+          <p style="margin-top:var(--space-4);">Follow us on LinkedIn: <a href="https://www.linkedin.com/company/hailie-housing-ai/" target="_blank" rel="noopener">Hailie Housing AI</a></p>
+          <p style="margin-top:var(--space-2);">Website: <a href="https://housingai.org/" target="_blank" rel="noopener">housingai.org</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-tagline">Independent. Not-for-Profit. Built for housing.</p>
+        <p class="footer-legal">&copy; 2026 HAILIE. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);">CC BY-SA 4.0</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

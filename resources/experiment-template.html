@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Experiment Template | HAILIE</title>
+  <meta name="description" content="A structured template for testing AI use cases safely in social housing — with housing problem, data screen, human oversight, baseline measures and a decision framework. Includes a worked repairs triage example.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Images/hailie-logo-small.png">
+  <link rel="apple-touch-icon" href="../Images/hailie-logo-big.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo"><img src="../Images/hailie-logo-small.png" alt="HAILIE"></a>
+      <div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="../for-leaders.html" class="nav-link">For Leaders</a><div class="nav-item has-dropdown"><a href="../resources.html" class="nav-link active">Resources <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></a><nav class="nav-dropdown" aria-label="Resources pages"><a href="../resources.html#start-here" class="nav-dropdown-link">Start Here</a><a href="../resources.html#governance" class="nav-dropdown-link">Governance and Assurance</a><a href="../resources.html#it-digital-data" class="nav-dropdown-link">IT, Digital and Data</a><a href="../resources.html#toolkits" class="nav-dropdown-link">AI Toolkits and Templates</a><a href="../resources.html#tenant-ethics" class="nav-dropdown-link">Tenant Impact and Ethics</a><a href="../resources.html#use-cases-benefits" class="nav-dropdown-link">Role-Based AI Use Cases</a><a href="../resources.html#small-providers" class="nav-dropdown-link">Small Provider Resources</a><a href="../resources.html#events-recordings" class="nav-dropdown-link">Events and Recordings</a><a href="../resources.html#recommended-reading" class="nav-dropdown-link">Recommended Reading</a></nav></div><a href="../events.html" class="nav-link">Events</a><a href="../about.html" class="nav-link">About</a><a href="../join.html" class="btn btn-primary" style="margin-left:8px;">Join the Exchange</a></div>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer"><svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg><svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer"><div class="nav-drawer-links"><a href="../index.html" class="nav-link">Home</a><a href="../for-leaders.html" class="nav-link">For Leaders</a><a href="../resources.html" class="nav-link">Resources</a><div class="nav-drawer-submenu"><a href="../resources.html#start-here" class="nav-link">Start Here</a><a href="../resources.html#governance" class="nav-link">Governance and Assurance</a><a href="../resources.html#it-digital-data" class="nav-link">IT, Digital and Data</a><a href="../resources.html#toolkits" class="nav-link">AI Toolkits and Templates</a><a href="../resources.html#tenant-ethics" class="nav-link">Tenant Impact and Ethics</a><a href="../resources.html#use-cases-benefits" class="nav-link">Role-Based AI Use Cases</a><a href="../resources.html#small-providers" class="nav-link">Small Provider Resources</a><a href="../resources.html#events-recordings" class="nav-link">Events and Recordings</a><a href="../resources.html#recommended-reading" class="nav-link">Recommended Reading</a></div><a href="../events.html" class="nav-link">Events</a><a href="../about.html" class="nav-link">About</a></div><a href="../join.html" class="btn btn-primary" style="width:100%;justify-content:center;">Join the Exchange</a></div>
+
+  <main id="main">
+    <div class="resource-page-header">
+      <div class="container">
+        <div class="breadcrumb"><a href="../index.html">Home</a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg><a href="../resources.html">Resources</a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg><span>AI Experiment Template</span></div>
+        <span class="overline">AI Toolkits and Templates</span>
+        <h1>AI Experiment Template</h1>
+        <div class="resource-meta"><span class="tag">Template</span><span class="tag tag--it">Toolkit</span><span class="tag">Service owners · IT · Change teams</span></div>
+        <p style="margin-top:var(--space-4);max-width:65ch;color:var(--color-text-muted);">Help housing teams test AI use cases safely — with a housing problem statement, data screen, human oversight controls, baseline measures and a decision framework.</p>
+      </div>
+    </div>
+
+    <section class="resource-body">
+      <div class="container">
+        <div class="resource-layout">
+          <div class="resource-main">
+
+            <div class="callout callout--info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="color:var(--color-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+              <p><strong>An experiment should answer one question:</strong> Is this AI use safe enough, useful enough and measurable enough to continue?</p>
+            </div>
+
+            <img src="../Images/hailie-ai-experiment-repairs-triage.png" alt="Repairs officer reviewing an AI summary against repair notes and damp inspection photos" style="border-radius:8px;width:100%;border:1px solid var(--color-border);margin:var(--space-6) 0;" loading="lazy">
+
+            <!-- Example story -->
+            <div style="margin:var(--space-6) 0;padding:var(--space-5);background:var(--color-bg-soft);border-radius:10px;border-left:4px solid var(--color-secondary);">
+              <h3 style="color:var(--color-primary);margin-bottom:var(--space-4);">Worked example: Repairs triage</h3>
+              <p>A repairs manager notices staff spend the first part of each morning reading long repair notes, checking photos and asking tenants for missing information. Some jobs are simple. Some may involve damp, mould, safety or vulnerability. The team wants to know if AI can help staff see the important details faster.</p>
+              <p style="margin-top:var(--space-4);">The team selects 50 historic repair cases, removes personal details, and asks AI to summarise each note, flag missing information and suggest a category. A repairs officer checks every output against the original record. The final decision stays with the officer.</p>
+              <p style="margin-top:var(--space-4);">After two weeks: AI helped with summaries but was weaker at spotting vulnerability clues in messy notes. The team redesigns the prompt, improves the data fields and runs another small test. A useful result — the organisation learned where AI helps, where the workflow is weak, and where human judgement must stay visible.</p>
+            </div>
+
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-4);">The experiment template</h2>
+
+            <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);margin-bottom:var(--space-5);">
+              <table class="use-case-table">
+                <thead><tr><th colspan="2">Experiment summary</th></tr></thead>
+                <tbody>
+                  <tr><td>Experiment name</td><td></td></tr>
+                  <tr><td>Service area</td><td></td></tr>
+                  <tr><td>Experiment owner</td><td></td></tr>
+                  <tr><td>Start date</td><td></td></tr>
+                  <tr><td>Review date</td><td></td></tr>
+                  <tr><td>AI tool or supplier</td><td></td></tr>
+                  <tr><td>Type of AI use</td><td>Assistant / supplier feature / bespoke model / automation / other</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Section 1: Housing Problem</h3>
+              <div class="callout callout--info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="color:var(--color-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg><p>Write one short paragraph. Start with the service problem, not the tool.</p></div>
+              <p style="margin-top:var(--space-3);font-style:italic;color:var(--color-text-muted);">Example: Repairs staff spend time reading long free-text repair notes before deciding the next action. We want to test whether AI can summarise the notes and flag missing information, while staff keep responsibility for the final decision.</p>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Section 2: Proposed AI Use</h3>
+              <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);">
+                <table class="use-case-table">
+                  <tbody>
+                    <tr><td>What will the AI do?</td><td></td></tr>
+                    <tr><td>What will the AI not do?</td><td></td></tr>
+                    <tr><td>Who will use it?</td><td></td></tr>
+                    <tr><td>Who checks the output?</td><td></td></tr>
+                    <tr><td>How can staff reject or correct the output?</td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Section 3: Data and Risk Screen</h3>
+              <div class="checklist-items">
+                <div class="checklist-item"><div class="checklist-box"></div><label>Does the experiment use personal data?</label></div>
+                <div class="checklist-item"><div class="checklist-box"></div><label>Does it use special category data or sensitive tenant information?</label></div>
+                <div class="checklist-item"><div class="checklist-box"></div><label>Could it affect access to a service, priority or outcome for a resident?</label></div>
+                <div class="checklist-item"><div class="checklist-box"></div><label>Could it create or update an official record?</label></div>
+                <div class="checklist-item"><div class="checklist-box"></div><label>Could the output be sent to a resident?</label></div>
+                <div class="checklist-item"><div class="checklist-box"></div><label>Is a DPIA needed? Has information governance reviewed the experiment?</label></div>
+              </div>
+              <div class="callout callout--risk" style="margin-top:var(--space-3);"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg><p>If any answer raises concern, pause and complete a fuller risk review before testing.</p></div>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Section 4: Human Oversight</h3>
+              <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);">
+                <table class="use-case-table">
+                  <tbody>
+                    <tr><td>Which human decision stays in place?</td><td></td></tr>
+                    <tr><td>What must staff verify before using the output?</td><td></td></tr>
+                    <tr><td>What errors are most likely?</td><td></td></tr>
+                    <tr><td>How will staff report errors or concerns?</td><td></td></tr>
+                    <tr><td>What would cause the experiment to stop?</td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Section 5: Baseline and Success Measures</h3>
+              <p style="color:var(--color-text-muted);margin-bottom:var(--space-3);">Use at least one quality measure. Time saved is useful but not enough on its own.</p>
+              <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);">
+                <table class="use-case-table">
+                  <thead><tr><th>Measure</th><th>Current baseline</th><th>Target for experiment</th></tr></thead>
+                  <tbody>
+                    <tr><td>Time taken</td><td></td><td></td></tr>
+                    <tr><td>Quality or accuracy</td><td></td><td></td></tr>
+                    <tr><td>Staff confidence</td><td></td><td></td></tr>
+                    <tr><td>Resident impact</td><td></td><td></td></tr>
+                    <tr><td>Error or rework rate</td><td></td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Section 6: Decision after the experiment</h3>
+              <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);">
+                <table class="use-case-table">
+                  <thead><tr><th>Decision</th><th>Use when</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Stop</strong></td><td>The use case is unsafe, not useful or not worth the effort.</td></tr>
+                    <tr><td><strong>Redesign</strong></td><td>The idea has value, but the workflow, data or controls need work.</td></tr>
+                    <tr><td><strong>Continue testing</strong></td><td>More evidence is needed before wider use.</td></tr>
+                    <tr><td><strong>Prepare for rollout</strong></td><td>Evidence is strong enough for a fuller implementation plan.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div style="margin-top:var(--space-6);padding:var(--space-5);background:var(--color-bg-soft);border-radius:10px;">
+              <h3 style="color:var(--color-primary);margin-bottom:var(--space-3);">HAILIE reminder</h3>
+              <p>A good experiment is small, honest and reversible. It should produce evidence that leaders can understand: what was tested, what data was used, what changed, what risk appeared and what decision should come next.</p>
+            </div>
+
+          </div>
+          <aside class="resource-sidebar">
+            <div class="sidebar-card"><h4>Related resources</h4><ul><li><a href="safe-use-patterns.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Safe-Use Patterns</a></li><li><a href="dpia-template.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>DPIA Template</a></li><li><a href="role-use-cases.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Role-Based AI Use Cases</a></li><li><a href="service-benefits.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Service Benefits Examples</a></li></ul></div>
+            <div class="sidebar-card" style="background:var(--color-primary);border-color:var(--color-primary);"><h4 style="color:rgba(255,255,255,0.7);">Join the Exchange</h4><p style="font-size:var(--text-sm);color:rgba(255,255,255,0.85);margin-bottom:var(--space-4);">Practical guidance and peer learning. Free. No sales pitches.</p><a href="../join.html" class="btn btn-white" style="width:100%;justify-content:center;font-size:var(--text-sm);">Join HAILIE</a></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo"><div class="container"><div class="footer-inner"><div class="footer-brand"><a href="../index.html" class="footer-logo"><img src="../Images/hailie-logo-small.png" alt="HAILIE"><span class="footer-logo-text">HAILIE</span></a><p class="footer-description">Housing AI Leadership &amp; Implementation Exchange — independent, vendor-neutral, built for housing.</p></div><nav class="footer-nav"><h4>Pages</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../for-leaders.html">For Leaders</a></li><li><a href="../resources.html">Resources</a></li><li><a href="../events.html">Events</a></li><li><a href="../about.html">About</a></li><li><a href="../join.html">Join</a></li></ul></nav><div class="footer-contact"><h4 style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-bottom:var(--space-4);">Contact</h4><p>Questions or contributions:<br><a href="mailto:guy@housingai.org">guy@housingai.org</a></p><p style="margin-top:var(--space-4);">Follow us on LinkedIn: <a href="https://www.linkedin.com/company/hailie-housing-ai/" target="_blank" rel="noopener">Hailie Housing AI</a></p></div></div><div class="footer-bottom"><p class="footer-tagline">Independent. Not-for-Profit. Built for housing.</p><p class="footer-legal">&copy; 2026 HAILIE. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);">CC BY-SA 4.0</a></p></div></div></footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

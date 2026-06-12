@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0B5C70"/>
+  <!-- House roof -->
+  <path d="M16 8 L6 17 L8 17 L8 24 L24 24 L24 17 L26 17 Z" fill="#FFFFFF"/>
+  <!-- Door -->
+  <rect x="13.5" y="18" width="5" height="6" fill="#0B5C70"/>
+  <!-- Circuit accent dots (house + circuit motif) -->
+  <circle cx="11" cy="20.5" r="1.2" fill="#1F94A3"/>
+  <circle cx="21" cy="20.5" r="1.2" fill="#1F94A3"/>
+  <line x1="12.2" y1="20.5" x2="13.5" y2="20.5" stroke="#1F94A3" stroke-width="0.8"/>
+  <line x1="18.5" y1="20.5" x2="19.8" y2="20.5" stroke="#1F94A3" stroke-width="0.8"/>
+</svg>
