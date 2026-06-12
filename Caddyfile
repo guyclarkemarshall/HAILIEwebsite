@@ -26,9 +26,15 @@
         Permissions-Policy "geolocation=(), microphone=(), camera=()"
     }
 
-    # Long-term cache headers for assets (1 year max-age, immutable)
-    @static_assets {
-        path *.css *.js *.svg *.png *.jpg *.jpeg *.ico *.webp *.woff *.woff2
+    # Caching rules: Media & fonts are long-term cached
+    @media_assets {
+        path *.svg *.png *.jpg *.jpeg *.ico *.webp *.woff *.woff2
     }
-    header @static_assets Cache-Control "public, max-age=31536000, immutable"
+    header @media_assets Cache-Control "public, max-age=31536000, immutable"
+
+    # Code and styles are checked for updates immediately
+    @code_assets {
+        path *.css *.js *.html
+    }
+    header @code_assets Cache-Control "public, max-age=0, must-revalidate"
 }

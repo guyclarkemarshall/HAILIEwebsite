@@ -236,4 +236,136 @@
     });
   }
 
+  /* --- MailerLite Inline Form Submit handler ---------------- */
+  const mlForm = document.querySelector('.ml-block-form');
+  if (mlForm) {
+    mlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const emailInput = mlForm.querySelector('input[name="fields[email]"]');
+      const submitBtn = mlForm.querySelector('button[type="submit"]');
+      const successRow = document.querySelector('.row-success');
+      const formRow = document.querySelector('.row-form');
+      let errorLabel = mlForm.querySelector('.ml-error-message');
+
+      // Create error element if it doesn't exist
+      if (!errorLabel) {
+        errorLabel = document.createElement('div');
+        errorLabel.classList.add('ml-error-message');
+        errorLabel.style.color = 'var(--color-risk)';
+        errorLabel.style.fontSize = 'var(--text-sm)';
+        errorLabel.style.marginTop = 'var(--space-2)';
+        mlForm.appendChild(errorLabel);
+      }
+      errorLabel.textContent = '';
+
+      // Validate opt-in checkbox
+      const optIn = document.getElementById('newsletter-opt-in-1');
+      if (optIn && !optIn.checked) {
+        errorLabel.textContent = 'Please opt in to receive updates.';
+        return;
+      }
+
+      // Disable inputs and change submit text
+      submitBtn.disabled = true;
+      const originalHtml = submitBtn.innerHTML;
+      submitBtn.textContent = 'Subscribing...';
+
+      const formData = new FormData(mlForm);
+
+      fetch(mlForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          if (formRow) formRow.style.display = 'none';
+          if (successRow) successRow.style.display = 'block';
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHtml;
+
+          let errMsg = 'Something went wrong. Please check your email and try again.';
+          if (data.errors && data.errors.fields && data.errors.fields.email) {
+            errMsg = data.errors.fields.email[0];
+          } else if (data.errors) {
+            errMsg = Object.values(data.errors).flat().join(' ');
+          }
+          errorLabel.textContent = errMsg;
+        }
+      })
+      .catch(err => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+        errorLabel.textContent = 'Network error. Please try again later.';
+        if (window.Sentry) {
+          window.Sentry.captureException(err);
+        }
+      });
+    });
+  }
+
+  /* --- Clickable Resource Card Tags ------------------------- */
+  document.querySelectorAll('.resource-card .tag').forEach(tag => {
+    tag.style.cursor = 'pointer';
+    tag.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const tagText = tag.innerText.toLowerCase().trim();
+      let matchedFilterBtn = null;
+
+      if (filterBtns.length > 0) {
+        filterBtns.forEach(btn => {
+          const btnFilter = btn.getAttribute('data-filter').toLowerCase();
+          if (tagText.includes(btnFilter) || btnFilter.includes(tagText)) {
+            matchedFilterBtn = btn;
+          }
+        });
+      }
+
+      if (matchedFilterBtn) {
+        matchedFilterBtn.click();
+      } else {
+        if (searchInput) {
+          searchInput.value = tag.innerText;
+          searchInput.dispatchEvent(new Event('input'));
+        }
+      }
+    });
+  });
+
+  /* --- Interactive Checklists ------------------------------- */
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    // Set accessibility attributes
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('role', 'checkbox');
+    item.setAttribute('aria-checked', 'false');
+    item.style.cursor = 'pointer';
+
+    const toggleCheck = () => {
+      const isChecked = item.classList.toggle('checked');
+      item.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+    };
+
+    item.addEventListener('click', toggleCheck);
+
+    // Keyboard support: Space/Enter toggles
+    item.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault(); // Prevent scrolling on Space
+        toggleCheck();
+      }
+    });
+  });
+
 })();

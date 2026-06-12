@@ -1938,7 +1938,7 @@ h4 { font-size: var(--text-h4); font-weight: 600; }
 .use-case-table td:first-child {
   font-weight: 600;
   color: var(--color-primary);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* --- Sidebar (resource pages) ------------------------------ */
@@ -2470,5 +2470,39 @@ h4 { font-size: var(--text-h4); font-weight: 600; }
 
 .ml-subscribe-form .ml-error .label-description {
   color: var(--color-risk) !important;
+}
+
+/* Checkbox interactive states */
+.checklist-item:hover .checklist-box {
+  border-color: var(--color-secondary);
+}
+
+.checklist-item.checked .checklist-box {
+  background-color: #059669; /* Emerald Green */
+  border-color: #059669;
+  position: relative;
+}
+
+.checklist-item.checked .checklist-box::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checklist-item.checked label {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* MailerLite Validation / Error inline message style */
+.ml-error-message {
+  font-weight: 500;
+  margin-top: var(--space-2);
 }
 
