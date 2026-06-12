@@ -158,4 +158,82 @@
     });
   });
 
+  /* --- Unified Resources Search & Filter ------------------- */
+  const searchInput = document.getElementById('resource-search');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const resourceCards = document.querySelectorAll('.resource-card');
+  const sections = document.querySelectorAll('.resource-section');
+
+  if (searchInput || filterBtns.length > 0) {
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    const filterResources = () => {
+      resourceCards.forEach(card => {
+        const title = card.querySelector('h3') ? card.querySelector('h3').innerText.toLowerCase() : '';
+        const desc = card.querySelector('p') ? card.querySelector('p').innerText.toLowerCase() : '';
+        const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.innerText.toLowerCase());
+        
+        const cardText = `${title} ${desc} ${tags.join(' ')}`;
+        
+        // Search match
+        const matchesSearch = cardText.includes(searchQuery);
+        
+        // Filter match
+        let matchesFilter = activeFilter === 'all';
+        if (!matchesFilter) {
+          matchesFilter = tags.some(tag => {
+            if (activeFilter === 'governance') return tag.includes('governance') || tag.includes('leadership');
+            if (activeFilter === 'it') return tag.includes('it') || tag.includes('digital') || tag.includes('data');
+            if (activeFilter === 'procurement') return tag.includes('procurement');
+            if (activeFilter === 'tenant') return tag.includes('tenant') || tag.includes('ethics') || tag.includes('transparency');
+            if (activeFilter === 'recording') return tag.includes('recording') || tag.includes('video');
+            return tag.includes(activeFilter);
+          });
+        }
+
+        if (matchesSearch && matchesFilter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Collapse sections with no matching cards
+      sections.forEach(section => {
+        const cards = section.querySelectorAll('.resource-card');
+        if (cards.length === 0) return; // Skip if it doesn't contain resource cards
+
+        let hasVisibleCards = false;
+        cards.forEach(c => {
+          if (c.style.display !== 'none') {
+            hasVisibleCards = true;
+          }
+        });
+
+        if (hasVisibleCards) {
+          section.style.display = '';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        filterResources();
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.getAttribute('data-filter');
+        filterResources();
+      });
+    });
+  }
+
 })();
