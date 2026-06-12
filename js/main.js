@@ -236,19 +236,16 @@
     });
   }
 
-  /* --- MailerLite Inline Form Submit handler ---------------- */
+  /* --- MailerLite Inline Form Submit handler (Iframe fallback) - */
   const mlForm = document.querySelector('.ml-block-form');
-  if (mlForm) {
+  const mlIframe = document.getElementById('ml-submit-iframe');
+  
+  if (mlForm && mlIframe) {
     mlForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const emailInput = mlForm.querySelector('input[name="fields[email]"]');
-      const submitBtn = mlForm.querySelector('button[type="submit"]');
-      const successRow = document.querySelector('.row-success');
-      const formRow = document.querySelector('.row-form');
+      // Validate opt-in checkbox
+      const optIn = document.getElementById('newsletter-opt-in-1');
       let errorLabel = mlForm.querySelector('.ml-error-message');
-
-      // Create error element if it doesn't exist
+      
       if (!errorLabel) {
         errorLabel = document.createElement('div');
         errorLabel.classList.add('ml-error-message');
@@ -259,58 +256,39 @@
       }
       errorLabel.textContent = '';
 
-      // Validate opt-in checkbox
-      const optIn = document.getElementById('newsletter-opt-in-1');
       if (optIn && !optIn.checked) {
+        e.preventDefault();
         errorLabel.textContent = 'Please opt in to receive updates.';
         return;
       }
 
-      // Disable inputs and change submit text
-      submitBtn.disabled = true;
-      const originalHtml = submitBtn.innerHTML;
-      submitBtn.textContent = 'Subscribing...';
+      // Disable submit button during submission
+      const submitBtn = mlForm.querySelector('button[type="submit"]');
+      let originalHtml = '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        originalHtml = submitBtn.innerHTML;
+        submitBtn.textContent = 'Subscribing...';
+      }
 
-      const formData = new FormData(mlForm);
-
-      fetch(mlForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          if (formRow) formRow.style.display = 'none';
-          if (successRow) successRow.style.display = 'block';
-        } else {
+      // Show success row after iframe loads response
+      const handleIframeLoad = () => {
+        const successRow = document.querySelector('.row-success');
+        const formRow = document.querySelector('.row-form');
+        
+        if (formRow) formRow.style.display = 'none';
+        if (successRow) successRow.style.display = 'block';
+        
+        // Re-enable button just in case
+        if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalHtml;
-
-          let errMsg = 'Something went wrong. Please check your email and try again.';
-          if (data.errors && data.errors.fields && data.errors.fields.email) {
-            errMsg = data.errors.fields.email[0];
-          } else if (data.errors) {
-            errMsg = Object.values(data.errors).flat().join(' ');
-          }
-          errorLabel.textContent = errMsg;
         }
-      })
-      .catch(err => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalHtml;
-        errorLabel.textContent = 'Network error. Please try again later.';
-        if (window.Sentry) {
-          window.Sentry.captureException(err);
-        }
-      });
+        
+        mlIframe.removeEventListener('load', handleIframeLoad);
+      };
+      
+      mlIframe.addEventListener('load', handleIframeLoad);
     });
   }
 
