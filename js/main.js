@@ -6,6 +6,31 @@
 (function () {
   'use strict';
 
+  /* --- Sentry Error Tracking ------------------------------- */
+  // Provide your Sentry DSN below to enable error tracking and analytics.
+  const SENTRY_DSN = 'https://9bc322d0f32b506ef01ec4c825a2a90e@o4511305200762880.ingest.de.sentry.io/4511553757577296';
+
+  if (SENTRY_DSN) {
+    const sentryScript = document.createElement('script');
+    sentryScript.src = 'https://browser.sentry-cdn.com/8.34.0/bundle.tracing.replay.min.js';
+    sentryScript.crossOrigin = 'anonymous';
+    sentryScript.onload = () => {
+      if (window.Sentry) {
+        window.Sentry.init({
+          dsn: SENTRY_DSN,
+          integrations: [
+            window.Sentry.browserTracingIntegration(),
+            window.Sentry.replayIntegration(),
+          ],
+          tracesSampleRate: 0.2, // Performance monitoring sampling rate
+          replaysSessionSampleRate: 0.1, // Replay sampling rate
+          replaysOnErrorSampleRate: 1.0, // Replay errors rate
+        });
+      }
+    };
+    document.head.appendChild(sentryScript);
+  }
+
   /* --- Sticky nav scroll class ----------------------------- */
   const nav = document.querySelector('.site-nav');
   if (nav) {
