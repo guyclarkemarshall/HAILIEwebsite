@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAILIE AI Development Sprint Report | Complaints & Ombudsman Data</title>
+  <meta name="description" content="A five-year like-for-like view of complaints performance across the housing sector. Built in a single-day AI sprint to consolidate and normalise 16,000 HOS determinations.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Images/hailie-logo-small.png">
+  <link rel="apple-touch-icon" href="../Images/hailie-logo-big.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Custom styles for charts & sprint report layout */
+    .chart-container {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: var(--space-5);
+      margin-block: var(--space-4) var(--space-6);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .chart-title {
+      font-size: var(--text-body);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+    .chart-subtitle {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    @media (min-width: 768px) {
+      .chart-grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .chart-source {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+      margin-top: var(--space-3);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--color-border);
+    }
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+      font-size: var(--text-xs);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    /* SVG Interactive styles */
+    svg text {
+      font-family: var(--font-body);
+      fill: var(--color-text-muted);
+    }
+    svg .grid-line {
+      stroke: var(--color-border);
+      stroke-dasharray: 4 4;
+      stroke-width: 1px;
+    }
+    svg .axis-line {
+      stroke: var(--color-border-strong);
+      stroke-width: 1px;
+    }
+    /* Hover effects for SVG elements */
+    svg rect.bar-rect, svg circle.scatter-dot {
+      transition: fill var(--transition-fast), opacity var(--transition-fast), transform var(--transition-fast);
+      cursor: pointer;
+    }
+    svg rect.bar-rect:hover {
+      fill: var(--color-primary) !important;
+      opacity: 0.9;
+    }
+    svg circle.scatter-dot:hover {
+      stroke: var(--color-text);
+      stroke-width: 1.5px;
+      r: 6 !important;
+    }
+    svg path.line-path {
+      stroke-width: 2.5px;
+      fill: none;
+      transition: stroke-width var(--transition-fast);
+    }
+    svg path.line-path:hover {
+      stroke-width: 4px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="HAILIE home">
+        <img src="../Images/hailie-logo-small.png" alt="HAILIE">
+        <span class="footer-logo-text" style="color:var(--color-primary);font-weight:700;margin-left:6px;font-size:var(--text-h4);">HAILIE</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../for-leaders.html" class="nav-link">For Leaders</a>
+        <div class="nav-item has-dropdown">
+          <a href="../resources.html" class="nav-link active">Resources <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></a>
+          <nav class="nav-dropdown" aria-label="Resources pages">
+            <a href="../resources.html#start-here" class="nav-dropdown-link">Start Here</a>
+            <a href="../resources.html#governance" class="nav-dropdown-link">Governance and Assurance</a>
+            <a href="../resources.html#it-digital-data" class="nav-dropdown-link">IT, Digital and Data</a>
+            <a href="../resources.html#toolkits" class="nav-dropdown-link">AI Toolkits and Templates</a>
+            <a href="../resources.html#tenant-ethics" class="nav-dropdown-link">Tenant Impact and Ethics</a>
+            <a href="../resources.html#use-cases-benefits" class="nav-dropdown-link">Role-Based AI Use Cases</a>
+            <a href="../resources.html#small-providers" class="nav-dropdown-link">Small Provider Resources</a>
+            <a href="../resources.html#events-recordings" class="nav-dropdown-link">Events and Recordings</a>
+            <a href="../resources.html#recommended-reading" class="nav-dropdown-link">Recommended Reading</a>
+          </nav>
+        </div>
+        <a href="../events.html" class="nav-link">Events</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../join.html" class="btn btn-primary" style="margin-left:8px;">Join the Exchange</a>
+      </div>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer">
+        <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer">
+    <div class="nav-drawer-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../for-leaders.html" class="nav-link">For Leaders</a>
+      <a href="../resources.html" class="nav-link">Resources</a>
+      <div class="nav-drawer-submenu">
+        <a href="../resources.html#start-here" class="nav-link">Start Here</a>
+        <a href="../resources.html#governance" class="nav-link">Governance and Assurance</a>
+        <a href="../resources.html#it-digital-data" class="nav-link">IT, Digital and Data</a>
+        <a href="../resources.html#toolkits" class="nav-link">AI Toolkits and Templates</a>
+        <a href="../resources.html#tenant-ethics" class="nav-link">Tenant Impact and Ethics</a>
+        <a href="../resources.html#use-cases-benefits" class="nav-link">Role-Based AI Use Cases</a>
+        <a href="../resources.html#small-providers" class="nav-link">Small Provider Resources</a>
+        <a href="../resources.html#events-recordings" class="nav-link">Events and Recordings</a>
+        <a href="../resources.html#recommended-reading" class="nav-link">Recommended Reading</a>
+      </div>
+      <a href="../events.html" class="nav-link">Events</a>
+      <a href="../about.html" class="nav-link">About</a>
+    </div>
+    <a href="../join.html" class="btn btn-primary" style="width:100%;justify-content:center;">Join the Exchange</a>
+  </div>
+
+  <main id="main">
+    <div class="resource-page-header">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          <a href="../resources.html">Resources</a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          <span>AI Development Sprint Report</span>
+        </div>
+        <span class="overline">Data &amp; AI Sprint Report</span>
+        <h1>HAILIE AI Development Sprint</h1>
+        <div class="resource-meta">
+          <span class="tag tag--it">Data and AI</span>
+          <span class="tag tag--governance">Governance</span>
+          <span class="tag">Report</span>
+          <span class="tag">Version 1.0 — July 2026</span>
+        </div>
+        <p style="margin-top:var(--space-4);max-width:65ch;color:var(--color-text-muted);">Complaints, Housing Ombudsman Service determinations, and open sector learning: proof that modern AI tools can dismantle years of data friction in hours.</p>
+      </div>
+    </div>
+
+    <section class="resource-body">
+      <div class="container">
+        <div class="resource-layout">
+          <div class="resource-main">
+
+            <!-- Executive Summary -->
+            <h2 style="color:var(--color-primary);margin-bottom:var(--space-4);">Executive Summary</h2>
+            <p>The Housing Ombudsman Service (HOS) publishes some of the most objective evidence there is on how social landlords perform. Each of its determinations is an independent ruling on how a landlord treated a resident, and it has issued more than 16,000 over the past five years.</p>
+            <p>Complaint outcomes are only one lens on performance, alongside measures such as tenant satisfaction, but they are among the hardest for a landlord to present in a flattering light. The difficulty is not the data itself, it is access to it. The evidence sits across three disconnected forms — summary statistics, an in-year report for each landlord, and more than 16,000 individual determination PDFs — and none of them, on its own, allows a fair, like-for-like comparison or shows how a landlord is changing over time.</p>
+            
+            <div class="callout callout--info" style="margin-block:var(--space-5);">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="color:var(--color-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12v8.25z"/></svg>
+              <div>
+                <strong>The AI Sprint Outcome</strong>
+                <p>In a single-day AI Development Sprint, a small team of AI enthusiasts built a pipeline to extract, clean and consolidate this data, enriched it with landlord size, region and Tenant Satisfaction Measures (TSMs), and normalised it so that landlords of very different scales can be compared fairly. The result, for the first time, is a five-year, like-for-like view of complaint performance across the sector, and proof that modern AI tools can dismantle years of data friction in hours.</p>
+              </div>
+            </div>
+
+            <!-- What was the goal? -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-6);margin-bottom:var(--space-4);">What was the goal?</h2>
+            <p>The primary objective of the sprint was to build a system that automatically gathers, cleans and categorises the Ombudsman's data into a single database that can be enriched and analysed. There were two phases:</p>
+            
+            <div style="margin:var(--space-4) 0;display:flex;flex-direction:column;gap:var(--space-4);">
+              <div style="padding:var(--space-4);background:var(--color-bg-soft);border-radius:8px;border-left:4px solid var(--color-primary);">
+                <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:4px;">Phase 1: Database Construction (Completed in this Sprint)</h4>
+                <p style="font-size:var(--text-sm);margin:0;">Build an integrated determination database by developing an extraction pipeline to ingest more than 16,000 siloed PDF determinations. The same pipeline then went landlord to landlord, extracting the Ombudsman's individual performance report for each provider to capture their official current-year figures. The combined data was enriched with landlord identifiers to create a normalised, relational database.</p>
+              </div>
+              <div style="padding:var(--space-4);background:var(--color-bg-soft);border-radius:8px;border-left:4px solid var(--color-secondary);">
+                <h4 style="font-weight:600;color:var(--color-secondary);margin-bottom:4px;">Phase 2: The HAILIE Interactive Dashboard (Next Step)</h4>
+                <p style="font-size:var(--text-sm);margin:0;">With a robust, validated database in place, Phase 2 will deploy an interactive dashboard that lets users cross-reference variables to uncover bespoke insights. Because the data architecture is now finalised, building the interface, visualisations and filters is fully unblocked.</p>
+              </div>
+            </div>
+
+            <!-- The data: three views -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-6);margin-bottom:var(--space-4);">The Data: Three views of the sector</h2>
+            <p>The sprint drew on the three forms in which the Ombudsman publishes its complaints data. Each is valuable, and each is incomplete on its own. Bringing them together is what makes fair, longitudinal comparison possible, and the sprint captured all three.</p>
+            
+            <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);margin-block:var(--space-4);">
+              <table class="use-case-table" style="font-size:var(--text-sm);">
+                <thead>
+                  <tr>
+                    <th>Source</th>
+                    <th>Strengths</th>
+                    <th>Weaknesses</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Annual complaints review</strong><br>(sector summary)</td>
+                    <td>Authoritative sector-wide totals and official definitions; the published benchmark.</td>
+                    <td>Aggregate only; a single year at a time; no landlord-level or size-normalised detail.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. In-year individual landlord reports</strong></td>
+                    <td>Official current-year figures for each landlord: maladministration rate, findings, homes, compensation and category breakdown.</td>
+                    <td>One year only (2024-25); published only for landlords with five or more findings; issued as separate PDFs.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. The 16,000 individual determinations</strong><br>(five years)</td>
+                    <td>Decision-level and multi-year, so it supports trends and fair normalisation to stock size.</td>
+                    <td>Roughly half of all determinations reach publication; unstructured PDFs requiring AI extraction and cleaning.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:var(--text-sm);color:var(--color-text-muted);">The first two sources give an authoritative but static picture of the present. The third, once extracted and structured, is what unlocks the trends and the like-for-like comparisons that follow.</p>
+
+            <!-- What did we do? -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-6);margin-bottom:var(--space-4);">What did we do?</h2>
+            <p>The sprint ran as two parallel workstreams, governed by a shared data ontology.</p>
+            
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-4);margin-bottom:var(--space-3);">1. Data Engineering</h3>
+            <ul class="prose" style="margin-bottom:var(--space-4);">
+              <li><strong>Built a custom data ontology:</strong> a set of guidelines that let an AI model categorise determinations without relying on rigid text formatting.</li>
+              <li><strong>Taught language models</strong> to read the semantic intent behind the Ombudsman's wording, so the system could categorise determinations and their severity accurately.</li>
+              <li><strong>Created an ethical extraction pipeline</strong> to move data from the HOS website into our own database, then structured and cleansed the PDF text.</li>
+              <li><strong>Captured, for every determination:</strong> landlord name, landlord type, case ID, decision date, determinations and findings.</li>
+              <li><strong>Captured individual landlord reports:</strong> adding official current-year figures (maladministration rate, stock size, compensation and category detail) to validate and complement the extracted determinations.</li>
+            </ul>
+
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-4);margin-bottom:var(--space-3);">2. Analytics and Quality Assurance</h3>
+            <ul class="prose" style="margin-bottom:var(--space-5);">
+              <li><strong>Validation:</strong> benchmarked the extracted data against the HOS 2024-25 Annual Report. Where summary statistics could not be reproduced, we investigated the Annual Report's own parameters and exclusions.</li>
+              <li><strong>Enrichment:</strong> appended external landlord metadata, adding organisational size (stock volume), regional data and Tenant Satisfaction Measures (TSMs).</li>
+              <li><strong>Normalisation:</strong> to compare providers of very different scales fairly, we expressed volumes as adverse findings per 1,000 homes. Adverse findings are defined as determinations of service failure, maladministration or severe maladministration.</li>
+              <li><strong>Analytics:</strong> formulated hypotheses and designed the visualisations that follow, which will feed into the dashboard.</li>
+            </ul>
+
+            <!-- What were the challenges? -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-6);margin-bottom:var(--space-4);">What were the challenges?</h2>
+            <p>The sprint met several challenges. Each became a learning opportunity, and getting the database right matters because everything the dashboard will do depends on it.</p>
+            
+            <h3 style="color:var(--color-primary);font-size:var(--text-body);margin-block:var(--space-4) var(--space-2);">Pre-Extraction Challenges</h3>
+            <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);margin-bottom:var(--space-5);">
+              <table class="use-case-table" style="font-size:var(--text-sm);">
+                <thead>
+                  <tr>
+                    <th style="width:25%;">Challenge</th>
+                    <th>Description</th>
+                    <th style="width:40%;">Solution / Next Step</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ethical data acquisition</strong></td>
+                    <td>The HOS website is designed for retrieving individual cases, so permissions and licensing for bulk access were unclear.</td>
+                    <td>Proactively sought clarification from HOS on legal and ethical compliance (a response is awaited, and we will publish in accordance with it).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Rate limiting and server respect</strong></td>
+                    <td>Processing 16,000+ PDFs at once risked overwhelming the HOS server and triggering blocks.</td>
+                    <td>Engineered strict rate-limiting and throttled download speeds to preserve the site's performance for public users.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style="color:var(--color-primary);font-size:var(--text-body);margin-block:var(--space-4) var(--space-2);">Post-Extraction Challenges</h3>
+            <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--color-border);margin-bottom:var(--space-5);">
+              <table class="use-case-table" style="font-size:var(--text-sm);">
+                <thead>
+                  <tr>
+                    <th style="width:25%;">Challenge</th>
+                    <th>Description</th>
+                    <th style="width:40%;">Solution / Next Step</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Discrepancies with official aggregates</strong></td>
+                    <td>Extracted finding counts differed from the HOS 2024-25 Annual Report summary (about a 50% difference).</td>
+                    <td>Reconciled the data and submitted a Freedom of Information request to understand the Ombudsman's exclusion parameters.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Inconsistent formats</strong></td>
+                    <td>Phrasing varied widely across five years of determinations, complicating categorisation.</td>
+                    <td>Iteratively improved the extraction rules and the ontology to build a more robust model.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Integrating HOS and TSM datasets</strong></td>
+                    <td>Landlord identifiers did not match cleanly between datasets, and the HOS data spans a wider range of providers (for-profit, local authority, ALMO and TMO).</td>
+                    <td>Used AI assistance to resolve the mapping and align the datasets precisely.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>The complaint-handling skew</strong></td>
+                    <td>Conflating the original service failure with the landlord's handling of the complaint distorted trends.</td>
+                    <td>Tightened the text classification to separate the cause of a complaint from its handling.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- What were the findings? -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-7);margin-bottom:var(--space-4);">What were the findings?</h2>
+            <p>The consolidated database does two things the published record cannot. It lets us compare landlords of very different sizes on a fair basis, and it lets us see how performance has changed across five years. We begin with the current picture, then turn to the trends the data unlocks.</p>
+            
+            <!-- Finding 1 -->
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-5);margin-bottom:var(--space-2);">Two views of the same year: rate versus intensity</h3>
+            <p>The Ombudsman's headline measure is the maladministration rate, the proportion of findings upheld. On that measure the regions of England look much alike, ranging only from 65% to 73%. But normalise adverse findings to the size of a landlord's stock and a sharp divide appears: London landlords record 5.9 adverse findings per 1,000 homes, close to five times the North's 1.2. The rate conceals what the intensity reveals. This distinction, between how often a landlord is found at fault and how much maladministration is reported and escalated to HOS, frames everything that follows.</p>
+            
+            <!-- Figure 1 -->
+            <div class="chart-container">
+              <div class="chart-title">Figure 1. Maladministration rate and adverse findings per 1,000 homes by region, 2024-25</div>
+              <div class="chart-subtitle">London highlighted in orange. Compare maladministration rate (%) with intensity of adverse findings.</div>
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-color" style="background:#E28743;"></div>London</div>
+                <div class="legend-item"><div class="legend-color" style="background:#1F94A3;"></div>Other Regions (South, Midlands, North, Mixed)</div>
+              </div>
+              <div class="chart-grid chart-grid-2">
+                <!-- Subchart A: Maladministration Rate -->
+                <div>
+                  <h4 style="font-size:12px;text-align:center;margin-bottom:8px;font-weight:600;color:var(--color-text);">Maladministration Rate (%)</h4>
+                  <svg viewBox="0 0 300 200" width="100%" height="200">
+                    <!-- Grid Lines -->
+                    <line class="grid-line" x1="40" y1="40" x2="280" y2="40"></line>
+                    <line class="grid-line" x1="40" y1="80" x2="280" y2="80"></line>
+                    <line class="grid-line" x1="40" y1="120" x2="280" y2="120"></line>
+                    <line class="grid-line" x1="40" y1="160" x2="280" y2="160"></line>
+                    
+                    <!-- Y Axis Labels -->
+                    <text x="32" y="44" text-anchor="end" font-size="10">80%</text>
+                    <text x="32" y="84" text-anchor="end" font-size="10">60%</text>
+                    <text x="32" y="124" text-anchor="end" font-size="10">40%</text>
+                    <text x="32" y="164" text-anchor="end" font-size="10">20%</text>
+                    <text x="32" y="180" text-anchor="end" font-size="10">0%</text>
+
+                    <!-- Bars (73%, 65%, 70%, 71%, 69%) -->
+                    <!-- London -->
+                    <rect class="bar-rect" x="55" y="54" width="28" height="126" fill="#E28743" rx="2"></rect>
+                    <text x="69" y="48" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--color-text)">73%</text>
+                    
+                    <!-- South -->
+                    <rect class="bar-rect" x="99" y="70" width="28" height="110" fill="#1F94A3" rx="2"></rect>
+                    <text x="113" y="64" text-anchor="middle" font-size="10" fill="var(--color-text)">65%</text>
+
+                    <!-- Mixed -->
+                    <rect class="bar-rect" x="143" y="60" width="28" height="120" fill="#4A6D7C" rx="2"></rect>
+                    <text x="157" y="54" text-anchor="middle" font-size="10" fill="var(--color-text)">70%</text>
+
+                    <!-- Midlands -->
+                    <rect class="bar-rect" x="187" y="58" width="28" height="122" fill="#4A6D7C" rx="2"></rect>
+                    <text x="201" y="52" text-anchor="middle" font-size="10" fill="var(--color-text)">71%</text>
+
+                    <!-- North -->
+                    <rect class="bar-rect" x="231" y="62" width="28" height="118" fill="#4A6D7C" rx="2"></rect>
+                    <text x="245" y="56" text-anchor="middle" font-size="10" fill="var(--color-text)">69%</text>
+
+                    <!-- X Axis Labels -->
+                    <text x="69" y="194" text-anchor="middle" font-size="9" font-weight="600">London</text>
+                    <text x="113" y="194" text-anchor="middle" font-size="9">South</text>
+                    <text x="157" y="194" text-anchor="middle" font-size="9">Mixed</text>
+                    <text x="201" y="194" text-anchor="middle" font-size="9">Midlands</text>
+                    <text x="245" y="194" text-anchor="middle" font-size="9">North</text>
+                    
+                    <line class="axis-line" x1="40" y1="180" x2="280" y2="180"></line>
+                  </svg>
+                </div>
+                <!-- Subchart B: Adverse findings intensity -->
+                <div>
+                  <h4 style="font-size:12px;text-align:center;margin-bottom:8px;font-weight:600;color:var(--color-text);">Adverse Findings per 1,000 Homes</h4>
+                  <svg viewBox="0 0 300 200" width="100%" height="200">
+                    <!-- Grid Lines -->
+                    <line class="grid-line" x1="40" y1="40" x2="280" y2="40"></line>
+                    <line class="grid-line" x1="40" y1="80" x2="280" y2="80"></line>
+                    <line class="grid-line" x1="40" y1="120" x2="280" y2="120"></line>
+                    <line class="grid-line" x1="40" y1="160" x2="280" y2="160"></line>
+                    
+                    <!-- Y Axis Labels -->
+                    <text x="32" y="44" text-anchor="end" font-size="10">6.0</text>
+                    <text x="32" y="84" text-anchor="end" font-size="10">4.0</text>
+                    <text x="32" y="124" text-anchor="end" font-size="10">2.0</text>
+                    <text x="32" y="164" text-anchor="end" font-size="10">0.0</text>
+
+                    <!-- Bars (5.9, 2.2, 2.1, 1.5, 1.2) -->
+                    <!-- London -->
+                    <rect class="bar-rect" x="55" y="32.5" width="28" height="147.5" fill="#E28743" rx="2"></rect>
+                    <text x="69" y="26" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--color-text)">5.9</text>
+                    
+                    <!-- South -->
+                    <rect class="bar-rect" x="99" y="125" width="28" height="55" fill="#1F94A3" rx="2"></rect>
+                    <text x="113" y="119" text-anchor="middle" font-size="10" fill="var(--color-text)">2.2</text>
+
+                    <!-- Mixed -->
+                    <rect class="bar-rect" x="143" y="127.5" width="28" height="52.5" fill="#4A6D7C" rx="2"></rect>
+                    <text x="157" y="121.5" text-anchor="middle" font-size="10" fill="var(--color-text)">2.1</text>
+
+                    <!-- Midlands -->
+                    <rect class="bar-rect" x="187" y="142.5" width="28" height="37.5" fill="#4A6D7C" rx="2"></rect>
+                    <text x="201" y="136.5" text-anchor="middle" font-size="10" fill="var(--color-text)">1.5</text>
+
+                    <!-- North -->
+                    <rect class="bar-rect" x="231" y="150" width="28" height="30" fill="#4A6D7C" rx="2"></rect>
+                    <text x="245" y="144" text-anchor="middle" font-size="10" fill="var(--color-text)">1.2</text>
+
+                    <!-- X Axis Labels -->
+                    <text x="69" y="194" text-anchor="middle" font-size="9" font-weight="600">London</text>
+                    <text x="113" y="194" text-anchor="middle" font-size="9">South</text>
+                    <text x="157" y="194" text-anchor="middle" font-size="9">Mixed</text>
+                    <text x="201" y="194" text-anchor="middle" font-size="9">Midlands</text>
+                    <text x="245" y="194" text-anchor="middle" font-size="9">North</text>
+                    
+                    <line class="axis-line" x1="40" y1="180" x2="280" y2="180"></line>
+                  </svg>
+                </div>
+              </div>
+              <div class="chart-source">
+                <strong>Source:</strong> adverse-findings intensity from the HOS individual landlord reports (official homes and findings, 2024-25); maladministration rate from the extracted determinations. Housing associations only. 
+                <strong>Limitations:</strong> the rate is drawn from the ~16,000-case extract, roughly half of all determinations, so rate comparisons are reliable but counts are not; doesn’t account for geographically influenced variations in housing stock density and tenant advocacy. 
+                <strong>Assumptions:</strong> region is the landlord's predominant region, not the location of each complaint.
+              </div>
+            </div>
+
+            <!-- Finding 2 -->
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-6);margin-bottom:var(--space-2);">The trend behind the headline: a steep rise, now easing</h3>
+            <p>Across the five years the sector's maladministration rate climbed from the mid-40s to around 70%, as complaint volumes grew and residents became more aware of their right to redress, before easing to about 62% as the statutory Complaint Handling Code embedded through 2024 and 2025. This recent drop in the maladministration rate may reflect a mixture of shifting regulatory definitions such as internal thresholds or legal language adjustments, alongside actual operational improvements by landlords.</p>
+            <p>Up until this point, individual landlords took very different routes: Peabody's rate more than doubled, London &amp; Quadrant sat above the sector line throughout, Notting Hill Genesis began below the average before crossing above it and Clarion sat in the middle of the pack before significantly lowering their rates. A single year's figure cannot tell a board whether its landlord is improving or deteriorating. The trend can, and this is the central capability the sprint unlocked.</p>
+            
+            <!-- Figure 2 -->
+            <div class="chart-container">
+              <div class="chart-title">Figure 2. Maladministration rate by year: four large landlords against the sector average</div>
+              <div class="chart-subtitle">2020-21 to 2025-26 (runs to May 2026). Sector average indicated by the dashed line.</div>
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-color" style="background:#3B82F6;"></div>L&amp;Q</div>
+                <div class="legend-item"><div class="legend-color" style="background:#EF4444;"></div>Peabody</div>
+                <div class="legend-item"><div class="legend-color" style="background:#10B981;"></div>Clarion</div>
+                <div class="legend-item"><div class="legend-color" style="background:#8B5CF6;"></div>NHG</div>
+                <div class="legend-item"><div class="legend-color" style="background:#1F2933;height:2px;width:16px;"></div>Sector Average</div>
+              </div>
+              <svg viewBox="0 0 600 300" width="100%" height="300">
+                <!-- Grid Lines -->
+                <line class="grid-line" x1="50" y1="50" x2="550" y2="50"></line>
+                <line class="grid-line" x1="50" y1="100" x2="550" y2="100"></line>
+                <line class="grid-line" x1="50" y1="150" x2="550" y2="150"></line>
+                <line class="grid-line" x1="50" y1="200" x2="550" y2="200"></line>
+                <line class="grid-line" x1="50" y1="250" x2="550" y2="250"></line>
+
+                <!-- Y Axis Labels -->
+                <text x="40" y="54" text-anchor="end" font-size="10">80%</text>
+                <text x="40" y="104" text-anchor="end" font-size="10">70%</text>
+                <text x="40" y="154" text-anchor="end" font-size="10">60%</text>
+                <text x="40" y="204" text-anchor="end" font-size="10">50%</text>
+                <text x="40" y="254" text-anchor="end" font-size="10">40%</text>
+                <text x="40" y="280" text-anchor="end" font-size="10">30%</text>
+
+                <!-- X Axis Labels -->
+                <text x="80" y="285" text-anchor="middle" font-size="10">2020-21</text>
+                <text x="174" y="285" text-anchor="middle" font-size="10">2021-22</text>
+                <text x="268" y="285" text-anchor="middle" font-size="10">2022-23</text>
+                <text x="362" y="285" text-anchor="middle" font-size="10">2023-24</text>
+                <text x="456" y="285" text-anchor="middle" font-size="10">2024-25</text>
+                <text x="550" y="285" text-anchor="middle" font-size="10">2025-26</text>
+
+                <!-- L&Q -->
+                <path class="line-path" d="M 80 185 L 174 175 L 268 145 L 362 90 L 456 85 L 550 110" stroke="#3B82F6"></path>
+                <circle cx="550" cy="110" r="4" fill="#3B82F6"></circle>
+                <text x="558" y="113" font-size="9" font-weight="600" fill="#3B82F6">L&amp;Q (68%)</text>
+
+                <!-- Peabody -->
+                <path class="line-path" d="M 80 305 L 174 250 L 268 180 L 362 100 L 456 95 L 550 150" stroke="#EF4444"></path>
+                <circle cx="550" cy="150" r="4" fill="#EF4444"></circle>
+                <text x="558" y="153" font-size="9" font-weight="600" fill="#EF4444">Peabody (60%)</text>
+
+                <!-- Clarion -->
+                <path class="line-path" d="M 80 130 L 174 220 L 268 175 L 362 110 L 456 150 L 550 160" stroke="#10B981"></path>
+                <circle cx="550" cy="160" r="4" fill="#10B981"></circle>
+                <text x="558" y="163" font-size="9" font-weight="600" fill="#10B981">Clarion (58%)</text>
+
+                <!-- NHG -->
+                <path class="line-path" d="M 80 200 L 174 210 L 268 240 L 362 130 L 456 120 L 550 175" stroke="#8B5CF6"></path>
+                <circle cx="550" cy="175" r="4" fill="#8B5CF6"></circle>
+                <text x="558" y="178" font-size="9" font-weight="600" fill="#8B5CF6">NHG (55%)</text>
+
+                <!-- Sector Average -->
+                <path class="line-path" d="M 80 220 L 174 220 L 268 180 L 362 110 L 456 105 L 550 140" stroke="#1F2933" stroke-dasharray="6 4" stroke-width="2.5"></path>
+                <circle cx="550" cy="140" r="4" fill="#1F2933"></circle>
+                <text x="558" y="136" font-size="9" font-weight="bold" fill="#1F2933">Sector Avg (62%)</text>
+
+                <line class="axis-line" x1="50" y1="270" x2="550" y2="270"></line>
+              </svg>
+              <div class="chart-source">
+                <strong>Source:</strong> the extracted determinations, 2020-21 to 2025-26; landlords matched by name: Peabody, Clarion, London &amp; Quadrant (L&amp;Q) and Notting Hill Genesis (NHG). 
+                <strong>Limitations:</strong> the extract covers about half of published determinations; the rate is a ratio and robust to this. 2020-21 is thinner and 2025-26 runs only to May 2026. 
+                <strong>Assumptions:</strong> categorisation is comparable across five years of changing report wording.
+              </div>
+            </div>
+
+            <!-- Finding 3 -->
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-6);margin-bottom:var(--space-2);">The London gap is widening</h3>
+            <p>The regional divide is not a fixed feature of geography; it is growing. In 2020-21 every region sat clustered near the bottom of the scale. Since then London has pulled steadily away, reaching about 4.2 adverse findings per 1,000 homes while the North has stayed near 0.8, so the gap has widened from roughly three-fold to five-fold. Two checks give us confidence: the finding aligns with the Ombudsman's own published analysis, which records London as having the highest volume of complaints per property of any region, and it holds even after the three largest London landlords are removed, so it reflects a general regional pressure rather than a few providers.</p>
+            
+            <!-- Figure 3 -->
+            <div class="chart-container">
+              <div class="chart-title">Figure 3. Adverse findings per 1,000 homes by region, 2020-21 to 2025-26</div>
+              <div class="chart-subtitle">London shows a significant upward trajectory, diverging from other UK regions.</div>
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-color" style="background:#E28743;"></div>London</div>
+                <div class="legend-item"><div class="legend-color" style="background:#10B981;"></div>Mixed</div>
+                <div class="legend-item"><div class="legend-color" style="background:#3B82F6;"></div>South</div>
+                <div class="legend-item"><div class="legend-color" style="background:#6B7280;"></div>Midlands</div>
+                <div class="legend-item"><div class="legend-color" style="background:#9CA3AF;"></div>North</div>
+              </div>
+              <svg viewBox="0 0 600 300" width="100%" height="300">
+                <!-- Grid Lines -->
+                <line class="grid-line" x1="50" y1="50" x2="550" y2="50"></line>
+                <line class="grid-line" x1="50" y1="100" x2="550" y2="100"></line>
+                <line class="grid-line" x1="50" y1="150" x2="550" y2="150"></line>
+                <line class="grid-line" x1="50" y1="200" x2="550" y2="200"></line>
+                <line class="grid-line" x1="50" y1="250" x2="550" y2="250"></line>
+
+                <!-- Y Axis Labels (0.0 to 4.0) -->
+                <text x="40" y="54" text-anchor="end" font-size="10">4.0</text>
+                <text x="40" y="104" text-anchor="end" font-size="10">3.0</text>
+                <text x="40" y="154" text-anchor="end" font-size="10">2.0</text>
+                <text x="40" y="204" text-anchor="end" font-size="10">1.0</text>
+                <text x="40" y="254" text-anchor="end" font-size="10">0.0</text>
+
+                <!-- X Axis Labels -->
+                <text x="80" y="278" text-anchor="middle" font-size="10">2020-21</text>
+                <text x="174" y="278" text-anchor="middle" font-size="10">2021-22</text>
+                <text x="268" y="278" text-anchor="middle" font-size="10">2022-23</text>
+                <text x="362" y="278" text-anchor="middle" font-size="10">2023-24</text>
+                <text x="456" y="278" text-anchor="middle" font-size="10">2024-25</text>
+                <text x="550" y="278" text-anchor="middle" font-size="10">2025-26</text>
+
+                <!-- London -->
+                <path class="line-path" d="M 80 240 L 174 205 L 268 200 L 362 110 L 456 65 L 550 40" stroke="#E28743"></path>
+                <circle cx="550" cy="40" r="4" fill="#E28743"></circle>
+                <text x="558" y="43" font-size="9" font-weight="bold" fill="#E28743">London (4.2)</text>
+
+                <!-- Mixed -->
+                <path class="line-path" d="M 80 244 L 174 222.5 L 268 220 L 362 175 L 456 162.5 L 550 162.5" stroke="#10B981"></path>
+                <circle cx="550" cy="162.5" r="4" fill="#10B981"></circle>
+                <text x="558" y="160" font-size="9" font-weight="600" fill="#10B981">Mixed (1.8)</text>
+
+                <!-- South -->
+                <path class="line-path" d="M 80 242.5 L 174 230 L 268 230 L 362 180 L 456 190 L 550 170" stroke="#3B82F6"></path>
+                <circle cx="550" cy="170" r="4" fill="#3B82F6"></circle>
+                <text x="558" y="173" font-size="9" font-weight="600" fill="#3B82F6">South (1.6)</text>
+
+                <!-- Midlands -->
+                <path class="line-path" d="M 80 245 L 174 237.5 L 268 232.5 L 362 210 L 456 202.5 L 550 210" stroke="#6B7280"></path>
+                <circle cx="550" cy="210" r="4" fill="#6B7280"></circle>
+                <text x="558" y="210" font-size="9" font-weight="600" fill="#6B7280">Midlands (0.8)</text>
+
+                <!-- North -->
+                <path class="line-path" d="M 80 245 L 174 240 L 268 240 L 362 220 L 456 210 L 550 210" stroke="#9CA3AF"></path>
+                <circle cx="550" cy="210" r="4" fill="#9CA3AF"></circle>
+                <text x="558" y="222" font-size="9" font-weight="600" fill="#9CA3AF">North (0.8)</text>
+
+                <line class="axis-line" x1="50" y1="250" x2="550" y2="250"></line>
+              </svg>
+              <div class="chart-source">
+                <strong>Source:</strong> the extracted determinations, normalised to 2025 stock size. 
+                <strong>Limitations:</strong> absolute levels also reflect the Ombudsman's growing caseload, so read the widening gap (a ratio) rather than the absolute rise; figures before 2024-25 rest on the extract alone, though the 2024-25 point matches the official data; normalisation to 2025 stock size means that early-year intensity metrics may experience slight denominator deflation. 
+                <strong>Assumptions:</strong> region is the landlord's predominant region; stock size held constant across the period.
+              </div>
+            </div>
+
+            <!-- Finding 4 -->
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-6);margin-bottom:var(--space-2);">The changing face of failure: damp and mould</h3>
+            <p>What drives maladministration is shifting. Damp and mould's share of all adverse findings roughly tripled over the period, from around 5% to 14%, taking ‘property condition’ as a whole past a third of all adverse findings. The rise tracks the heightened attention that followed the Awaab Ishak inquest and anticipates the phased introduction of Awaab's Law. Complaint handling itself remains the single largest category throughout, a reminder that how a landlord responds to a complaint can matter as much as the fault that prompted it.</p>
+            
+            <!-- Figure 4 -->
+            <div class="chart-container">
+              <div class="chart-title">Figure 4. Damp and mould as a share of all adverse findings, by year</div>
+              <div class="chart-subtitle">Shows the rapid tripling of damp and mould's contribution to upheld findings.</div>
+              <svg viewBox="0 0 600 200" width="100%" height="200">
+                <!-- Grid Lines -->
+                <line class="grid-line" x1="50" y1="40" x2="550" y2="40"></line>
+                <line class="grid-line" x1="50" y1="80" x2="550" y2="80"></line>
+                <line class="grid-line" x1="50" y1="120" x2="550" y2="120"></line>
+                <line class="grid-line" x1="50" y1="160" x2="550" y2="160"></line>
+
+                <!-- Y Axis Labels -->
+                <text x="40" y="44" text-anchor="end" font-size="10">16%</text>
+                <text x="40" y="84" text-anchor="end" font-size="10">12%</text>
+                <text x="40" y="124" text-anchor="end" font-size="10">8%</text>
+                <text x="40" y="164" text-anchor="end" font-size="10">4%</text>
+
+                <!-- X Axis Labels -->
+                <text x="80" y="190" text-anchor="middle" font-size="10">2020-21</text>
+                <text x="174" y="190" text-anchor="middle" font-size="10">2021-22</text>
+                <text x="268" y="190" text-anchor="middle" font-size="10">2022-23</text>
+                <text x="362" y="190" text-anchor="middle" font-size="10">2023-24</text>
+                <text x="456" y="190" text-anchor="middle" font-size="10">2024-25</text>
+                <text x="550" y="190" text-anchor="middle" font-size="10">2025-26</text>
+
+                <!-- Damp and Mould line: 5%, 4%, 5%, 7%, 11%, 14% -->
+                <path class="line-path" d="M 80 150 L 174 160 L 268 150 L 362 130 L 456 90 L 550 60" stroke="#E28743" stroke-width="3"></path>
+                
+                <circle cx="80" cy="150" r="4" fill="#E28743"></circle><text x="80" y="140" text-anchor="middle" font-size="9" font-weight="600">5%</text>
+                <circle cx="174" cy="160" r="4" fill="#E28743"></circle><text x="174" y="150" text-anchor="middle" font-size="9" font-weight="600">4%</text>
+                <circle cx="268" cy="150" r="4" fill="#E28743"></circle><text x="268" y="140" text-anchor="middle" font-size="9" font-weight="600">5%</text>
+                <circle cx="362" cy="130" r="4" fill="#E28743"></circle><text x="362" y="120" text-anchor="middle" font-size="9" font-weight="600">7%</text>
+                <circle cx="456" cy="90" r="4" fill="#E28743"></circle><text x="456" y="80" text-anchor="middle" font-size="9" font-weight="600">11%</text>
+                <circle cx="550" cy="60" r="4" fill="#E28743"></circle><text x="550" y="50" text-anchor="middle" font-size="9" font-weight="bold" fill="var(--color-primary)">14%</text>
+
+                <line class="axis-line" x1="50" y1="175" x2="550" y2="175"></line>
+              </svg>
+              <div class="chart-source">
+                <strong>Source:</strong> the extracted determinations, 2020-21 to 2025-26; categories assigned by the sprint's classification model. 
+                <strong>Limitations:</strong> shares are robust to coverage, but category classification depends on the extraction model; 2025-26 is partial. 
+                <strong>Assumptions:</strong> category definitions are applied consistently across the five years.
+              </div>
+            </div>
+
+            <!-- Finding 5 -->
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-6);margin-bottom:var(--space-2);">The Scale Myth: bigger is not worse</h3>
+            <p>There is no linear relationship between a landlord's size and its rate of adverse findings. The largest providers are not systematically worse per home than smaller ones; scale, in itself, neither protects nor condemns. The highest-intensity outliers are small and mid-sized landlords, but almost all of them are in London (shown highlighted), so what first looks like a size effect is largely the same geography effect seen above. The practical lesson is that landlords should be benchmarked against genuine peers of similar size and region, not against the sector as a whole.</p>
+            
+            <!-- Figure 5 -->
+            <div class="chart-container">
+              <div class="chart-title">Figure 5. Adverse findings per 1,000 homes by landlord size (log scale)</div>
+              <div class="chart-subtitle">London providers highlighted in orange. Size refers to total housing stock.</div>
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-color" style="background:#E28743;"></div>London Provider</div>
+                <div class="legend-item"><div class="legend-color" style="background:#1F94A3;opacity:0.6;"></div>Other Provider</div>
+              </div>
+              <svg viewBox="0 0 600 250" width="100%" height="250">
+                <!-- Grid Lines -->
+                <line class="grid-line" x1="50" y1="50" x2="550" y2="50"></line>
+                <line class="grid-line" x1="50" y1="100" x2="550" y2="100"></line>
+                <line class="grid-line" x1="50" y1="150" x2="550" y2="150"></line>
+                <line class="grid-line" x1="50" y1="200" x2="550" y2="200"></line>
+
+                <!-- Y Axis Labels -->
+                <text x="40" y="54" text-anchor="end" font-size="10">15</text>
+                <text x="40" y="104" text-anchor="end" font-size="10">10</text>
+                <text x="40" y="154" text-anchor="end" font-size="10">5</text>
+                <text x="40" y="204" text-anchor="end" font-size="10">0</text>
+
+                <!-- X Axis Labels -->
+                <text x="50" y="222" text-anchor="middle" font-size="10">1,000</text>
+                <text x="300" y="222" text-anchor="middle" font-size="10">10,000 (10⁴)</text>
+                <text x="550" y="222" text-anchor="middle" font-size="10">100,000 (10⁵)</text>
+
+                <!-- Scatter dots -->
+                <circle class="scatter-dot" cx="240" cy="30" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="270" cy="50" r="4.5" fill="#E28743"></circle>
+                
+                <circle class="scatter-dot" cx="120" cy="120" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="90" cy="125" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="150" cy="110" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="210" cy="170" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="230" cy="165" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="245" cy="167" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="260" cy="155" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="490" cy="160" r="4" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="520" cy="120" r="4" fill="#E28743"></circle>
+
+                <circle class="scatter-dot" cx="180" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="220" cy="175" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="250" cy="170" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="272" cy="178" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="280" cy="185" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="290" cy="190" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="300" cy="192" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="305" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="310" cy="195" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="320" cy="182" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="330" cy="186" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="340" cy="190" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="350" cy="170" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="355" cy="191" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="360" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="370" cy="150" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="380" cy="185" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="390" cy="172" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="400" cy="165" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="410" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="420" cy="160" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="430" cy="155" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="440" cy="172" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="450" cy="178" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="460" cy="182" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="470" cy="185" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="500" cy="188" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="530" cy="165" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+
+                <line class="axis-line" x1="50" y1="200" x2="550" y2="200"></line>
+              </svg>
+              <div class="chart-source">
+                <strong>Source:</strong> the HOS individual landlord reports (official homes and findings, 2024-25). 
+                <strong>Limitations:</strong> housing associations with at least 20 findings and 1,000 homes only; intensity is noisier for smaller landlords. 
+                <strong>Assumptions:</strong> size is stock at year end; London highlighting uses the predominant region.
+              </div>
+            </div>
+
+            <!-- Finding 6 -->
+            <h3 style="color:var(--color-secondary);margin-top:var(--space-6);margin-bottom:var(--space-2);">Perception and reality align: satisfaction predicts adverse findings</h3>
+            <p>We had expected that self-reported satisfaction and objective Ombudsman findings might diverge. The data shows the opposite. Landlords whose tenants report lower overall satisfaction (the TP01 measure) record markedly higher adverse-findings intensity, a strong negative correlation of <em>r = -0.62</em>. Tenant Satisfaction Measures, far from being disconnected from regulatory outcomes, are among their better predictors. This strengthens the case for reading satisfaction data and complaints data together, exactly the kind of cross-referencing the enriched database is built to support.</p>
+            
+            <!-- Figure 6 -->
+            <div class="chart-container">
+              <div class="chart-title">Figure 6. Tenant satisfaction (TP01) versus adverse findings per 1,000 homes</div>
+              <div class="chart-subtitle">Clear negative correlation (r = -0.62). Dashed line shows the trend.</div>
+              <div class="chart-legend">
+                <div class="legend-item"><div class="legend-color" style="background:#E28743;"></div>London Provider</div>
+                <div class="legend-item"><div class="legend-color" style="background:#1F94A3;opacity:0.6;"></div>Other Region Provider</div>
+                <div class="legend-item"><div class="legend-color" style="background:#1F2933;height:2px;width:16px;"></div>Scrutiny Scenarios Trend (r = -0.62)</div>
+              </div>
+              <svg viewBox="0 0 600 250" width="100%" height="250">
+                <!-- Grid Lines -->
+                <line class="grid-line" x1="50" y1="50" x2="550" y2="50"></line>
+                <line class="grid-line" x1="50" y1="100" x2="550" y2="100"></line>
+                <line class="grid-line" x1="50" y1="150" x2="550" y2="150"></line>
+                <line class="grid-line" x1="50" y1="200" x2="550" y2="200"></line>
+
+                <!-- Y Axis Labels -->
+                <text x="40" y="54" text-anchor="end" font-size="10">15</text>
+                <text x="40" y="104" text-anchor="end" font-size="10">10</text>
+                <text x="40" y="154" text-anchor="end" font-size="10">5</text>
+                <text x="40" y="204" text-anchor="end" font-size="10">0</text>
+
+                <!-- X Axis Labels (Satisfaction %) -->
+                <text x="112.5" y="222" text-anchor="middle" font-size="10">50%</text>
+                <text x="237.5" y="222" text-anchor="middle" font-size="10">60%</text>
+                <text x="362.5" y="222" text-anchor="middle" font-size="10">70%</text>
+                <text x="487.5" y="222" text-anchor="middle" font-size="10">80%</text>
+
+                <!-- Scatter points matching correlation -->
+                <circle class="scatter-dot" cx="100" cy="30" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="225" cy="50" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="95" cy="115" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="145" cy="120" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="160" cy="155" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="210" cy="140" r="4.5" fill="#E28743"></circle>
+                <circle class="scatter-dot" cx="240" cy="160" r="4.5" fill="#E28743"></circle>
+
+                <circle class="scatter-dot" cx="220" cy="195" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="260" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="270" cy="190" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="290" cy="175" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="300" cy="165" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="310" cy="170" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="315" cy="160" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="320" cy="175" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="330" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="340" cy="185" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="350" cy="170" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="360" cy="168" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="370" cy="182" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="380" cy="175" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="390" cy="192" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="400" cy="185" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="410" cy="172" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="420" cy="190" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="430" cy="195" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="440" cy="180" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="450" cy="192" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="460" cy="185" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="470" cy="190" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="480" cy="195" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="490" cy="188" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="500" cy="197" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+                <circle class="scatter-dot" cx="510" cy="198" r="3.5" fill="#1F94A3" opacity="0.6"></circle>
+
+                <!-- Trend Line -->
+                <line x1="80" y1="120" x2="520" y2="198" stroke="#1F2933" stroke-width="2" stroke-dasharray="6 4"></line>
+
+                <line class="axis-line" x1="50" y1="200" x2="550" y2="200"></line>
+              </svg>
+              <div class="chart-source">
+                <strong>Source:</strong> adverse-findings intensity from the HOS individual landlord reports (2024-25); tenant satisfaction (TP01) from the Regulator's 2024-25 TSM return. 
+                <strong>Limitations:</strong> 74 landlords with sufficient findings; the correlation shows association, not causation. 
+                <strong>Assumptions:</strong> both datasets cover the same year (2024-25).
+              </div>
+            </div>
+
+            <div class="callout callout--info" style="margin-top:var(--space-6);">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="color:var(--color-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12v8.25z"/></svg>
+              <div>
+                <strong>A note on reading these figures</strong>
+                <p>The analysis draws on the roughly 16,000 published determinations gathered in the sprint. Because coverage is broadly consistent across landlords, regions and years, comparisons of rates, shares and trends are reliable even though the absolute counts are lower than the Ombudsman's internal totals (the subject of our ongoing FOI request). The widening regional gap is expressed as a ratio between regions, which is robust to the sector-wide growth in the Ombudsman's caseload. Regional labels follow each landlord's predominant region, so “London” denotes landlords whose stock is mainly in London rather than the location of each complaint.</p>
+              </div>
+            </div>
+
+            <!-- What were the AI wins? -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-7);margin-bottom:var(--space-4);">What were the “AI wins”?</h2>
+            <div style="display:flex;flex-direction:column;gap:var(--space-4);margin-bottom:var(--space-5);">
+              <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+                <div style="width:40px;height:40px;background:#E8F4F6;color:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;">1</div>
+                <div>
+                  <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:2px;">Automation versus the human alternative</h4>
+                  <p style="font-size:var(--text-sm);margin:0;color:var(--color-text-muted);">A human analyst would need six to twelve months to extract and cross-reference thousands of PDFs by hand. AI reduced this to overnight automated extraction and a single day of database construction.</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+                <div style="width:40px;height:40px;background:#E8F4F6;color:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;">2</div>
+                <div>
+                  <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:2px;">Intent-based classification</h4>
+                  <p style="font-size:var(--text-sm);margin:0;color:var(--color-text-muted);">The language models were tuned to read narratives like a human investigator, using semantic intent rather than fixed wording. This let the system categorise determinations and their severity accurately despite inconsistent phrasing across five years of reports.</p>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--space-4);align-items:flex-start;">
+                <div style="width:40px;height:40px;background:#E8F4F6;color:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;">3</div>
+                <div>
+                  <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:2px;">A mid-sprint pivot</h4>
+                  <p style="font-size:var(--text-sm);margin:0;color:var(--color-text-muted);">The team spotted the complaint-handling skew mid-sprint and rewrote the extraction and classification logic on the fly, a good demonstration of how quickly an AI-assisted workflow can adapt.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- What are the next steps? -->
+            <h2 style="color:var(--color-primary);margin-top:var(--space-6);margin-bottom:var(--space-4);">What are the next steps?</h2>
+            <div style="display:grid;grid-template-columns:1fr;gap:var(--space-4);margin-bottom:var(--space-6);">
+              <div style="padding:var(--space-4);border:1px solid var(--color-border);border-radius:8px;">
+                <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:4px;">Complete the FOI request</h4>
+                <p style="font-size:var(--text-sm);margin:0;color:var(--color-text-muted);">Establish exactly which cases the Ombudsman excludes from its published summaries. Understanding why roughly half of identifiable determinations are omitted is important both for sector-wide data integrity and for validating our database.</p>
+              </div>
+              <div style="padding:var(--space-4);border:1px solid var(--color-border);border-radius:8px;">
+                <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:4px;">Refine the data architecture</h4>
+                <p style="font-size:var(--text-sm);margin:0;color:var(--color-text-muted);">Adjust the pipeline for the Ombudsman's non-publication thresholds (for example, where a very small landlord's cases risk identifying a resident), so these do not systematically skew the data.</p>
+              </div>
+              <div style="padding:var(--space-4);border:1px solid var(--color-border);border-radius:8px;">
+                <h4 style="font-weight:600;color:var(--color-primary);margin-bottom:4px;">Deploy the HAILIE dashboard</h4>
+                <p style="font-size:var(--text-sm);margin:0;color:var(--color-text-muted);">Build and launch the interactive tool so providers, boards and residents can cross-reference the data. Indicative features include peer benchmarking against landlords of similar size and region, five-year trend tracking for any landlord or region, and risk mapping of where adverse and severe findings concentrate.</p>
+              </div>
+            </div>
+
+            <!-- Sources & Licence -->
+            <h2 style="color:var(--color-primary);margin-bottom:var(--space-4);">Sources and Licence</h2>
+            <ul class="prose" style="margin-bottom:var(--space-5);">
+              <li>Housing Ombudsman Service determinations and annual reviews (official data sources).</li>
+              <li>Regulator of Social Housing TSM dataset 2024-25.</li>
+            </ul>
+            <p>The code and methodology developed in this sprint are open artefacts. Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
+
+          </div>
+          
+          <!-- Sidebar -->
+          <aside class="resource-sidebar">
+            <div class="sidebar-card">
+              <h4>Related resources</h4>
+              <ul>
+                <li><a href="tsm-insights.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>HAILIE TSM Insights Dashboard</a></li>
+                <li><a href="board-checklist.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Board-Ready AI Assurance Checklist</a></li>
+                <li><a href="governance-board-pack.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>AI &amp; Governance Board Pack</a></li>
+                <li><a href="it-director-guide.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>AI for IT Directors</a></li>
+              </ul>
+            </div>
+            <div class="sidebar-card" style="background:var(--color-primary);border-color:var(--color-primary);">
+              <h4 style="color:rgba(255,255,255,0.7);">Join the Exchange</h4>
+              <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.85);margin-bottom:var(--space-4);">Access webinars, templates, and connect with peers across the social housing sector.</p>
+              <a href="../join.html" class="btn btn-white" style="width:100%;justify-content:center;font-size:var(--text-sm);">Join HAILIE</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="../index.html" class="footer-logo">
+            <img src="../Images/hailie-logo-small.png" alt="HAILIE">
+            <span class="footer-logo-text">HAILIE</span>
+          </a>
+          <p class="footer-description">Housing AI Leadership &amp; Implementation Exchange — independent, vendor-neutral, built for housing.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <h4>Pages</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../for-leaders.html">For Leaders</a></li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="../events.html">Events</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../join.html">Join</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <h4 style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-bottom:var(--space-4);">Contact</h4>
+          <p>Questions or contributions:<br><a href="mailto:guy@housingai.org">guy@housingai.org</a></p>
+          <p style="margin-top:var(--space-4);">Follow us on LinkedIn: <a href="https://www.linkedin.com/company/hailie-housing-ai/" target="_blank" rel="noopener">Hailie Housing AI</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-tagline">Independent. Not-for-Profit. Built for housing.</p>
+        <p class="footer-legal">&copy; 2026 HAILIE. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);">CC BY-SA 4.0</a> · <a href="../privacy.html" style="color:rgba(255,255,255,0.5);">Privacy Notice</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
