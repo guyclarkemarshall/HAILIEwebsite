@@ -64,14 +64,14 @@ To deploy changes, simply push code to the repository branch connected to Railwa
 
 `share-a-document.html` lets members upload a policy, DPIA, board paper or template (PDF or Word, max 10 MB) and choose how HAILIE may use it (publish with attribution, publish anonymised, members only, or internal use only).
 
-The site is static, so submissions are handled by a free **Google Apps Script web app** (`apps-script/Code.gs`) running under a HAILIE Google account. It saves each file into a Google Drive folder (sub-foldered by the permission chosen), logs the details in a Google Sheet, emails HAILIE a notification and sends the submitter an acknowledgement. People submitting do not need a Google account.
+The site is static, so submissions are handled by a free **Google Apps Script web app** (`apps-script/Code.gs`) running under a HAILIE Google account. It saves each file into the shared HAILIE Google Drive folder (sub-foldered by the permission chosen), logs the details in a Google Sheet in the same folder, emails HAILIE a notification and sends the submitter an acknowledgement. People submitting do not need a Google account.
 
 Until the script is deployed and its URL added to the page, the form shows a notice asking people to email the document instead.
 
 ### One-time setup (about 10 minutes)
 1. Sign in to the Google account that should own the documents (e.g. guy@housingai.org) and go to [script.google.com](https://script.google.com). Click **New project**.
 2. Delete the default code, paste in the contents of `apps-script/Code.gs`, and save. Optionally rename the project "HAILIE document submissions".
-3. (Optional) Edit the `CONFIG` block at the top: folder and sheet names, a notification address, or the IDs of an existing Drive folder and Sheet. The defaults create a folder called "HAILIE document submissions" in your Drive on the first submission.
+3. Check the `CONFIG` block at the top. `FOLDER_ID` is pre-set to the shared HAILIE submissions folder (`drive.google.com/drive/folders/14FYgbQWJzabJkpsSaPnRF03dRA1U8qhV`); the account deploying the script needs edit access to it. Permission sub-folders and the log Sheet are created inside it on the first submission. You can also change the sheet name, set a different notification address, or point at an existing Sheet by ID.
 4. Click **Deploy > New deployment**, choose type **Web app**, and set:
    - **Execute as**: Me
    - **Who has access**: Anyone

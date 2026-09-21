@@ -15,11 +15,13 @@
 
 // ---- Configuration ----------------------------------------------------
 var CONFIG = {
-  // Name of the Drive folder submissions are saved into. Created in the
-  // root of your Drive on first use if it does not exist. To use an
-  // existing folder instead, put its ID in FOLDER_ID.
+  // Drive folder submissions are saved into. FOLDER_ID is the ID from the
+  // folder's share link (drive.google.com/drive/folders/<ID>); the account
+  // that deploys this script must have edit access to it. If FOLDER_ID is
+  // blank, a folder named FOLDER_NAME is created in the root of the
+  // deploying account's Drive on first use instead.
   FOLDER_NAME: 'HAILIE document submissions',
-  FOLDER_ID: '',
+  FOLDER_ID: '14FYgbQWJzabJkpsSaPnRF03dRA1U8qhV',
 
   // Name of the Google Sheet used as a submission log. Created inside
   // the folder above on first use. To use an existing sheet, put its
