@@ -370,7 +370,29 @@
 
     const endpointConfigured = () => {
       const action = docForm.getAttribute('action') || '';
-      return /^https?:\/\//.test(action) && !/YOUR_FORM_ID/i.test(action);
+      return /^https?:\/\//.test(action) && !/YOUR_DEPLOYMENT_ID/i.test(action);
+    };
+
+    /* Read the chosen file as base64 so it can travel inside a JSON body.
+       The Google Apps Script receiver (apps-script/Code.gs) decodes it and
+       saves it to Drive. */
+    const readFileAsBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = String(reader.result || '');
+        resolve(result.slice(result.indexOf(',') + 1));
+      };
+      reader.onerror = () => reject(reader.error || new Error('Could not read file'));
+      reader.readAsDataURL(file);
+    });
+
+    /* Collect every named field except the file into a plain object */
+    const collectFields = () => {
+      const data = {};
+      new FormData(docForm).forEach((value, key) => {
+        if (!(value instanceof File)) data[key] = value;
+      });
+      return data;
     };
 
     const formatBytes = (bytes) => {
@@ -531,13 +553,27 @@
       submitBtn.textContent = 'Sending…';
 
       try {
+        const file = fileInput.files[0];
+        const payload = collectFields();
+        payload.file = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: await readFileAsBase64(file),
+        };
+
+        /* Sent as text/plain (the fetch default for a string body) on purpose:
+           Apps Script web apps do not answer CORS preflight requests, and a
+           plain-text POST needs none. */
         const response = await fetch(docForm.action, {
           method: 'POST',
-          body: new FormData(docForm),
-          headers: { 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
         });
 
-        if (response.ok) {
+        let data = null;
+        try { data = await response.json(); } catch (parseErr) { /* non-JSON body */ }
+
+        if (response.ok && data && data.ok) {
           docForm.hidden = true;
           successEl.hidden = false;
           successEl.focus();
@@ -545,15 +581,7 @@
           return;
         }
 
-        let detail = '';
-        try {
-          const data = await response.json();
-          if (data && data.errors && data.errors.length) {
-            detail = data.errors.map(err => err.message).join(' ');
-          } else if (data && data.error) {
-            detail = data.error;
-          }
-        } catch (parseErr) { /* non-JSON error body */ }
+        const detail = (data && data.error) ? data.error : '';
 
         showStatus(
           'Sorry, we could not send your document' + (detail ? ' (' + detail + ')' : '') + '. ' +

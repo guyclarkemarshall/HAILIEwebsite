@@ -21,6 +21,7 @@ HAILIE is an independent, vendor-neutral community for social housing leaders us
 │   └── style.css           # Core styling system (tokens, components, utilities)
 ├── Images/                 # Logo and visual page assets
 ├── resources/              # HTML guides, checklists, and templates
+├── apps-script/            # Google Apps Script that receives document submissions (deployed separately)
 ├── Caddyfile               # Caddy server production configuration
 ├── nixpacks.toml           # Nixpacks environment configuration for Caddy
 └── [pages].html            # Main site pages (index, about, events, for-leaders, join, share-a-document, resources, privacy)
@@ -63,17 +64,31 @@ To deploy changes, simply push code to the repository branch connected to Railwa
 
 `share-a-document.html` lets members upload a policy, DPIA, board paper or template (PDF or Word, max 10 MB) and choose how HAILIE may use it (publish with attribution, publish anonymised, members only, or internal use only).
 
-The site is static, so the form posts `multipart/form-data` to an external form-handling service. Until an endpoint is configured, the page shows a notice asking people to email the document instead.
+The site is static, so submissions are handled by a free **Google Apps Script web app** (`apps-script/Code.gs`) running under a HAILIE Google account. It saves each file into a Google Drive folder (sub-foldered by the permission chosen), logs the details in a Google Sheet, emails HAILIE a notification and sends the submitter an acknowledgement. People submitting do not need a Google account.
 
-### Configuration
-1. Create a form on a service that accepts file uploads via a standard multipart `POST` (for example [Formspree](https://formspree.io), whose file uploads require a paid plan; Getform, Basin and Web3Forms work the same way).
-2. Open `share-a-document.html` and replace the placeholder in the form's `action` attribute:
+Until the script is deployed and its URL added to the page, the form shows a notice asking people to email the document instead.
+
+### One-time setup (about 10 minutes)
+1. Sign in to the Google account that should own the documents (e.g. guy@housingai.org) and go to [script.google.com](https://script.google.com). Click **New project**.
+2. Delete the default code, paste in the contents of `apps-script/Code.gs`, and save. Optionally rename the project "HAILIE document submissions".
+3. (Optional) Edit the `CONFIG` block at the top: folder and sheet names, a notification address, or the IDs of an existing Drive folder and Sheet. The defaults create a folder called "HAILIE document submissions" in your Drive on the first submission.
+4. Click **Deploy > New deployment**, choose type **Web app**, and set:
+   - **Execute as**: Me
+   - **Who has access**: Anyone
+5. Click **Deploy** and authorise the permissions it asks for (Drive, Sheets, Gmail send). Copy the **Web app URL** ending in `/exec`.
+6. Open `share-a-document.html` and replace the placeholder in the form's `action` attribute with that URL:
    ```html
-   <form id="document-upload-form" action="https://formspree.io/f/YOUR_FORM_ID" ...>
+   <form id="document-upload-form" action="https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec" ...>
    ```
-3. Optionally adjust the size limit with the `data-max-size-mb` attribute on the same element (the help text on the page should be updated to match).
+7. Commit and push. Test with a small PDF; it should appear in Drive within a few seconds and you should receive an email.
 
-Field names sent to the endpoint: `name`, `email`, `organisation`, `role`, `document_title`, `document_type`, `document_status`, `document` (the file), `description`, `data_use`, `use_conditions`, `confirm_authority`, `confirm_privacy`, plus `_subject` and the `_gotcha` honeypot. Client-side validation, drag-and-drop and the success/error states live in `js/main.js` under "Document submission form".
+If you later change `Code.gs`, redeploy with **Deploy > Manage deployments > Edit > Version: New version** so the same URL picks up the change.
+
+### How it works
+- The browser reads the chosen file, base64-encodes it, and POSTs a JSON body (all form fields plus the file) to the script. The request is sent as `text/plain` so no CORS preflight is needed, which Apps Script does not support.
+- `doPost` validates the fields, file type and size, decodes the file, saves it as `YYYY-MM-DD - Organisation - original-name.pdf` in the matching permission sub-folder, appends a row to the log sheet, then emails.
+- Fields sent: `name`, `email`, `organisation`, `role`, `document_title`, `document_type`, `document_status`, `description`, `data_use`, `use_conditions`, `confirm_authority`, `confirm_privacy`, `file` (`name`, `type`, `size`, `data`), plus the `_gotcha` honeypot.
+- Limits: Apps Script accepts request bodies up to 50 MB and consumer Gmail accounts can send 100 emails a day, both well above expected volume. Change `data-max-size-mb` on the form, the help text on the page, and `MAX_FILE_BYTES` in the script together if you raise the file limit.
 
 ---
 
