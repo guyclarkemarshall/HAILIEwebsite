@@ -1,6 +1,7 @@
 /* ============================================================
    HAILIE — main.js
-   Interactive components: nav, FAQ accordion, scroll behaviour
+   Interactive components: nav, FAQ accordion, scroll behaviour,
+   resources filter, document submission form
    ============================================================ */
 
 (function () {
@@ -345,5 +346,232 @@
       }
     });
   });
+
+  /* --- Document submission form (share-a-document.html) ----- */
+  const docForm = document.getElementById('document-upload-form');
+
+  if (docForm) {
+    const fileInput   = docForm.querySelector('input[type="file"]');
+    const dropzone    = document.getElementById('document-dropzone');
+    const fileNameEl  = document.getElementById('document-file-name');
+    const statusEl    = document.getElementById('form-status');
+    const submitBtn   = document.getElementById('document-submit');
+    const successEl   = document.getElementById('form-success');
+    const maxSizeMb   = parseFloat(docForm.getAttribute('data-max-size-mb')) || 10;
+    const maxBytes    = maxSizeMb * 1024 * 1024;
+    const allowedExt  = ['pdf', 'doc', 'docx'];
+    const allowedMime = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+    const contactEmail = 'guy@housingai.org';
+    const mailtoHref = 'mailto:' + contactEmail + '?subject=' + encodeURIComponent('HAILIE document submission');
+
+    const endpointConfigured = () => {
+      const action = docForm.getAttribute('action') || '';
+      return /^https?:\/\//.test(action) && !/YOUR_FORM_ID/i.test(action);
+    };
+
+    const formatBytes = (bytes) => {
+      if (bytes < 1024 * 1024) return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    };
+
+    const fileIsValid = (file) => {
+      if (!file) return false;
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const typeOk = allowedExt.includes(ext) || allowedMime.includes(file.type);
+      return typeOk && file.size > 0 && file.size <= maxBytes;
+    };
+
+    const showStatus = (html, kind) => {
+      statusEl.className = 'form-status is-visible' + (kind ? ' form-status--' + kind : '');
+      statusEl.innerHTML = html;
+    };
+
+    const clearStatus = () => {
+      statusEl.className = 'form-status';
+      statusEl.innerHTML = '';
+    };
+
+    const setFieldError = (el, hasError) => {
+      const field = el.closest('.form-field') || el.closest('.form-section');
+      if (field) field.classList.toggle('has-error', hasError);
+      el.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+    };
+
+    /* Show the chosen file name and validate it immediately */
+    const updateFileName = () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) {
+        fileNameEl.textContent = 'Drag a file here, or choose one from your computer.';
+        return;
+      }
+      fileNameEl.textContent = file.name + ' (' + formatBytes(file.size) + ')';
+      const valid = fileIsValid(file);
+      setFieldError(fileInput, !valid);
+      const errEl = document.getElementById('document-error');
+      if (errEl) {
+        if (file.size > maxBytes) {
+          errEl.textContent = 'That file is ' + formatBytes(file.size) + '. Please choose one under ' + maxSizeMb + ' MB, or email it to us instead.';
+        } else if (!valid) {
+          errEl.textContent = 'Please choose a PDF or Word document (.pdf, .doc or .docx).';
+        }
+      }
+    };
+
+    fileInput.addEventListener('change', updateFileName);
+
+    /* Drag and drop onto the upload box */
+    if (dropzone) {
+      ['dragenter', 'dragover'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('is-dragover');
+        });
+      });
+      ['dragleave', 'drop'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('is-dragover');
+        });
+      });
+      dropzone.addEventListener('drop', (e) => {
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+          try {
+            fileInput.files = e.dataTransfer.files;
+            updateFileName();
+          } catch (err) {
+            /* Some browsers do not allow programmatic assignment; user can use the picker */
+          }
+        }
+      });
+    }
+
+    /* Clear per-field errors as the user corrects them */
+    docForm.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => {
+      el.addEventListener('input', () => setFieldError(el, false));
+      el.addEventListener('change', () => setFieldError(el, false));
+    });
+    docForm.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => {
+      el.addEventListener('change', () => {
+        const section = el.closest('.form-section');
+        if (section) section.classList.remove('has-error');
+      });
+    });
+
+    const validate = () => {
+      let firstInvalid = null;
+
+      /* Text, email, select fields */
+      docForm.querySelectorAll('.form-input[required], .form-select[required]').forEach(el => {
+        const ok = el.checkValidity();
+        setFieldError(el, !ok);
+        if (!ok && !firstInvalid) firstInvalid = el;
+      });
+
+      /* File */
+      const file = fileInput.files && fileInput.files[0];
+      const fileOk = fileIsValid(file);
+      setFieldError(fileInput, !fileOk);
+      if (!fileOk) {
+        const errEl = document.getElementById('document-error');
+        if (errEl && !file) errEl.textContent = 'Please choose a PDF or Word document under ' + maxSizeMb + ' MB.';
+        if (!firstInvalid) firstInvalid = fileInput;
+      }
+
+      /* Data-use radio group */
+      const dataUse = docForm.querySelector('input[name="data_use"]:checked');
+      const dataUseSection = document.getElementById('data-use-fieldset');
+      if (dataUseSection) dataUseSection.classList.toggle('has-error', !dataUse);
+      if (!dataUse && !firstInvalid) firstInvalid = docForm.querySelector('input[name="data_use"]');
+
+      /* Confirmations */
+      const confirms = docForm.querySelectorAll('input[type="checkbox"][required]');
+      let confirmsOk = true;
+      confirms.forEach(cb => { if (!cb.checked) confirmsOk = false; });
+      const confirmSection = confirms.length ? confirms[0].closest('.form-section') : null;
+      if (confirmSection) confirmSection.classList.toggle('has-error', !confirmsOk);
+      if (!confirmsOk && !firstInvalid) firstInvalid = Array.from(confirms).find(cb => !cb.checked);
+
+      return firstInvalid;
+    };
+
+    docForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearStatus();
+
+      const firstInvalid = validate();
+      if (firstInvalid) {
+        showStatus('Please check the highlighted fields and try again.', 'error');
+        firstInvalid.focus({ preventScroll: false });
+        return;
+      }
+
+      /* Honeypot filled means a bot; pretend success quietly */
+      const honeypot = docForm.querySelector('input[name="_gotcha"]');
+      if (honeypot && honeypot.value) {
+        docForm.hidden = true;
+        successEl.hidden = false;
+        return;
+      }
+
+      if (!endpointConfigured()) {
+        showStatus(
+          'Online submissions are not switched on yet. Please email your document to ' +
+          '<a href="' + mailtoHref + '">' + contactEmail + '</a> and tell us how HAILIE may use it.',
+          'info'
+        );
+        return;
+      }
+
+      const originalHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const response = await fetch(docForm.action, {
+          method: 'POST',
+          body: new FormData(docForm),
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (response.ok) {
+          docForm.hidden = true;
+          successEl.hidden = false;
+          successEl.focus();
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        let detail = '';
+        try {
+          const data = await response.json();
+          if (data && data.errors && data.errors.length) {
+            detail = data.errors.map(err => err.message).join(' ');
+          } else if (data && data.error) {
+            detail = data.error;
+          }
+        } catch (parseErr) { /* non-JSON error body */ }
+
+        showStatus(
+          'Sorry, we could not send your document' + (detail ? ' (' + detail + ')' : '') + '. ' +
+          'Please try again, or email it to <a href="' + mailtoHref + '">' + contactEmail + '</a>.',
+          'error'
+        );
+      } catch (networkErr) {
+        showStatus(
+          'Sorry, something went wrong while sending. Please check your connection and try again, ' +
+          'or email the document to <a href="' + mailtoHref + '">' + contactEmail + '</a>.',
+          'error'
+        );
+        if (window.Sentry) window.Sentry.captureException(networkErr);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
+    });
+  }
 
 })();

@@ -23,7 +23,7 @@ HAILIE is an independent, vendor-neutral community for social housing leaders us
 ├── resources/              # HTML guides, checklists, and templates
 ├── Caddyfile               # Caddy server production configuration
 ├── nixpacks.toml           # Nixpacks environment configuration for Caddy
-└── [pages].html            # Main site pages (index, about, events, for-leaders, join, resources)
+└── [pages].html            # Main site pages (index, about, events, for-leaders, join, share-a-document, resources, privacy)
 ```
 
 ---
@@ -56,6 +56,24 @@ This site is optimized for deployment via **Railway** using **Nixpacks** and **C
   - Clean/pretty URLs (e.g., serving `/about` to `/about.html` without requiring the extension in the URL).
   
 To deploy changes, simply push code to the repository branch connected to Railway. Nixpacks will automatically install Caddy, bind it to the correct port, and spin up the container.
+
+---
+
+## 📄 Document Submission Form
+
+`share-a-document.html` lets members upload a policy, DPIA, board paper or template (PDF or Word, max 10 MB) and choose how HAILIE may use it (publish with attribution, publish anonymised, members only, or internal use only).
+
+The site is static, so the form posts `multipart/form-data` to an external form-handling service. Until an endpoint is configured, the page shows a notice asking people to email the document instead.
+
+### Configuration
+1. Create a form on a service that accepts file uploads via a standard multipart `POST` (for example [Formspree](https://formspree.io), whose file uploads require a paid plan; Getform, Basin and Web3Forms work the same way).
+2. Open `share-a-document.html` and replace the placeholder in the form's `action` attribute:
+   ```html
+   <form id="document-upload-form" action="https://formspree.io/f/YOUR_FORM_ID" ...>
+   ```
+3. Optionally adjust the size limit with the `data-max-size-mb` attribute on the same element (the help text on the page should be updated to match).
+
+Field names sent to the endpoint: `name`, `email`, `organisation`, `role`, `document_title`, `document_type`, `document_status`, `document` (the file), `description`, `data_use`, `use_conditions`, `confirm_authority`, `confirm_privacy`, plus `_subject` and the `_gotcha` honeypot. Client-side validation, drag-and-drop and the success/error states live in `js/main.js` under "Document submission form".
 
 ---
 
