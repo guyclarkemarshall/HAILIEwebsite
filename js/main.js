@@ -471,6 +471,29 @@
       });
     }
 
+    /* "Other" document type reveals a box to describe it */
+    const typeSelect = document.getElementById('document_type');
+    const typeOtherField = document.getElementById('document_type_other-field');
+    const typeOtherInput = document.getElementById('document_type_other');
+    const otherSelected = () => typeSelect && typeSelect.value === 'Other';
+    const syncTypeOther = () => {
+      if (!typeOtherField || !typeOtherInput) return;
+      const show = otherSelected();
+      typeOtherField.hidden = !show;
+      typeOtherInput.required = show;
+      if (!show) {
+        typeOtherInput.value = '';
+        setFieldError(typeOtherInput, false);
+      }
+    };
+    if (typeSelect) {
+      typeSelect.addEventListener('change', () => {
+        syncTypeOther();
+        if (otherSelected()) typeOtherInput.focus();
+      });
+      syncTypeOther();
+    }
+
     /* Clear per-field errors as the user corrects them */
     docForm.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(el => {
       el.addEventListener('input', () => setFieldError(el, false));
@@ -492,6 +515,13 @@
         setFieldError(el, !ok);
         if (!ok && !firstInvalid) firstInvalid = el;
       });
+
+      /* "Other" type must be described */
+      if (typeOtherInput && otherSelected()) {
+        const ok = typeOtherInput.value.trim().length > 0;
+        setFieldError(typeOtherInput, !ok);
+        if (!ok && !firstInvalid) firstInvalid = typeOtherInput;
+      }
 
       /* File */
       const file = fileInput.files && fileInput.files[0];
@@ -555,6 +585,10 @@
       try {
         const file = fileInput.files[0];
         const payload = collectFields();
+        if (otherSelected() && payload.document_type_other) {
+          payload.document_type = 'Other: ' + payload.document_type_other.trim();
+        }
+        delete payload.document_type_other;
         payload.file = {
           name: file.name,
           type: file.type,

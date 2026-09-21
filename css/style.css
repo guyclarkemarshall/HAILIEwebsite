@@ -2134,8 +2134,30 @@ h4 { font-size: var(--text-h4); font-weight: 600; }
   margin: 0;
 }
 
+/* Nav buttons: compact just above the drawer breakpoint so both fit */
+@media (max-width: 1140px) {
+  .nav-links .btn {
+    padding: 8px 12px;
+    font-size: var(--text-sm);
+    min-height: 40px;
+  }
+  .nav-links .nav-link {
+    padding-inline: var(--space-2);
+  }
+}
+
 /* --- Responsive -------------------------------------------- */
 @media (max-width: 1024px) {
+  /* Nav: with two call-to-action buttons the desktop links no longer
+     fit between 768px and 1024px, so switch to the drawer here */
+  .nav-links {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
   :root {
     --container-gutter: 20px;
   }
@@ -2204,15 +2226,6 @@ h4 { font-size: var(--text-h4); font-weight: 600; }
   h1 { font-size: 1.75rem; }
   h2 { font-size: 1.5rem; }
   .join-hero h1 { font-size: var(--text-h1); }
-
-  /* Nav */
-  .nav-links {
-    display: none;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
 
   /* Grids */
   .audience-cards {
@@ -2569,6 +2582,10 @@ h4 { font-size: var(--text-h4); font-weight: 600; }
 
 .form-field--full {
   grid-column: 1 / -1;
+}
+
+.form-field[hidden] {
+  display: none;
 }
 
 .form-field label {
