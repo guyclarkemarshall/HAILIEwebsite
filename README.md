@@ -87,7 +87,7 @@ If you later change `Code.gs`, redeploy with **Deploy > Manage deployments > Edi
 ### How it works
 - The browser reads the chosen file, base64-encodes it, and POSTs a JSON body (all form fields plus the file) to the script. The request is sent as `text/plain` so no CORS preflight is needed, which Apps Script does not support.
 - `doPost` validates the fields, file type and size, decodes the file, saves it as `YYYY-MM-DD - Organisation - original-name.pdf` in the matching permission sub-folder, appends a row to the log sheet, then emails.
-- Fields sent: `name`, `email`, `organisation`, `role`, `document_title`, `document_type`, `document_status`, `description`, `data_use`, `use_conditions`, `confirm_authority`, `confirm_privacy`, `file` (`name`, `type`, `size`, `data`), plus the `_gotcha` honeypot.
+- Fields sent: `name`, `email`, `organisation`, `role`, `document_title`, `document_type` (when "Other" is chosen, the description typed is sent as `Other: …`), `document_status`, `description`, `data_use`, `use_conditions`, `confirm_authority`, `confirm_privacy`, `file` (`name`, `type`, `size`, `data`), plus the `_gotcha` honeypot.
 - Limits: Apps Script accepts request bodies up to 50 MB and consumer Gmail accounts can send 100 emails a day, both well above expected volume. Change `data-max-size-mb` on the form, the help text on the page, and `MAX_FILE_BYTES` in the script together if you raise the file limit.
 
 ---
