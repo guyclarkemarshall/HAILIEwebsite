@@ -11,6 +11,11 @@
     # Enable compression (gzip & zstd)
     encode gzip zstd
 
+    # Old WordPress URLs for the hackathon pilot guides
+    redir /hackathon-pilot-attendee-guide* /resources/hackathon-attendee-guide.html permanent
+    redir /ai-for-better-housing-hackathon-pilot-facilitator-guide* /resources/hackathon-facilitator-guide.html permanent
+    redir /ai-for-better-housing-hackathon-pilot-tenant-participation-pack* /resources/hackathon-tenant-participation-pack.html permanent
+
     # Try files for clean URLs (e.g. /about maps to /about.html)
     try_files {path} {path}.html {path}/index.html =404
 
