@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Integrity: A View from the Regulator | HAILIE</title>
+  <meta name="description" content="Amanda Hall of the Regulator of Social Housing on the difference between data quality and data integrity, what the regulator expects from providers, and what it means for AI in social housing.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Images/hailie-logo-small.png">
+  <link rel="apple-touch-icon" href="../Images/hailie-logo-big.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .di-takeaways { list-style: disc; padding-left: var(--space-5); margin-top: var(--space-2); font-size: var(--text-sm); line-height: 1.6; }
+    .di-takeaways li + li { margin-top: var(--space-2); }
+    .di-grid { display: grid; gap: var(--space-4); margin-block: var(--space-5); }
+    @media (min-width: 640px) {
+      .di-grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .di-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    .di-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 10px; padding: var(--space-5); }
+    .di-card h3 { font-size: var(--text-body); color: var(--color-primary); margin-bottom: var(--space-2); }
+    .di-card p { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+    .di-card-label { display: inline-block; font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-secondary); margin-bottom: var(--space-2); }
+    .di-chain { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-block: var(--space-4); font-size: var(--text-sm); font-weight: 600; color: var(--color-primary); }
+    .di-chain span:not([aria-hidden]) { background: var(--color-bg-soft); border: 1px solid var(--color-border); border-radius: 999px; padding: var(--space-1) var(--space-3); }
+    .di-chain span[aria-hidden] { color: var(--color-text-muted); }
+    .di-table-wrap { overflow-x: auto; margin-block: var(--space-4); }
+    .di-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+    .di-table th { background: var(--color-primary); color: #fff; font-weight: 600; padding: var(--space-3) var(--space-4); text-align: left; }
+    .di-table td { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--color-border); vertical-align: top; line-height: 1.6; }
+    .di-table td:first-child { white-space: nowrap; color: var(--color-primary); }
+    .di-case { border: 1px solid var(--color-border); border-radius: 10px; padding: var(--space-5); margin-block: var(--space-5); }
+    .di-case-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
+    .di-case-head h3 { color: var(--color-primary); }
+    .di-case-quote { font-style: italic; color: var(--color-text-muted); margin-block: var(--space-3) var(--space-4); }
+    .di-case-cols { display: grid; gap: var(--space-4); }
+    @media (min-width: 640px) { .di-case-cols { grid-template-columns: repeat(3, 1fr); } }
+    .di-case-cols h4 { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-secondary); margin-bottom: var(--space-2); }
+    .di-case-cols ul { list-style: disc; padding-left: var(--space-4); font-size: var(--text-sm); line-height: 1.6; }
+    .di-case-takeaway { margin-top: var(--space-4); padding: var(--space-3) var(--space-4); background: var(--color-bg-soft); border-radius: 8px; font-size: var(--text-sm); }
+    .di-list { list-style: disc; padding-left: var(--space-5); margin-block: var(--space-3) var(--space-4); }
+    .di-list li { margin-bottom: var(--space-2); line-height: 1.6; }
+    .di-steps, .di-questions { list-style: decimal; padding-left: var(--space-5); margin-block: var(--space-3) var(--space-4); }
+    .di-steps li, .di-questions li { margin-bottom: var(--space-2); line-height: 1.6; }
+    .di-cycle { display: grid; gap: var(--space-3); margin-block: var(--space-4); counter-reset: cycle; }
+    @media (min-width: 640px) { .di-cycle { grid-template-columns: repeat(3, 1fr); } }
+    .di-cycle li { counter-increment: cycle; background: var(--color-bg-soft); border-radius: 10px; padding: var(--space-4); font-size: var(--text-sm); line-height: 1.5; }
+    .di-cycle li strong { display: block; color: var(--color-primary); font-size: var(--text-body); margin-bottom: var(--space-1); }
+    .di-cycle li strong::before { content: counter(cycle) ". "; color: var(--color-secondary); }
+    .di-cycle li span { color: var(--color-text-muted); }
+    .di-glance li { display: block; font-size: var(--text-sm); line-height: 1.5; margin-bottom: var(--space-3); }
+    .di-glance strong { display: block; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary navigation"><div class="container nav-inner"><a href="../index.html" class="nav-logo"><img src="../Images/hailie-logo-small.png" alt="HAILIE"></a><div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="../for-leaders.html" class="nav-link">For Leaders</a><div class="nav-item has-dropdown"><a href="../resources.html" class="nav-link active">Resources <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg></a><nav class="nav-dropdown" aria-label="Resources pages"><a href="../resources.html#start-here" class="nav-dropdown-link">Start Here</a><a href="../resources.html#governance" class="nav-dropdown-link">Governance and Assurance</a><a href="../resources.html#it-digital-data" class="nav-dropdown-link">IT, Digital and Data</a><a href="../resources.html#toolkits" class="nav-dropdown-link">AI Toolkits and Templates</a><a href="../resources.html#tenant-ethics" class="nav-dropdown-link">Tenant Impact and Ethics</a><a href="../resources.html#use-cases-benefits" class="nav-dropdown-link">Role-Based AI Use Cases</a><a href="../resources.html#small-providers" class="nav-dropdown-link">Small Provider Resources</a><a href="../resources.html#events-recordings" class="nav-dropdown-link">Events and Recordings</a><a href="../resources.html#recommended-reading" class="nav-dropdown-link">Recommended Reading</a></nav></div><a href="../events.html" class="nav-link">Events</a><a href="../about.html" class="nav-link">About</a><a href="../join.html" class="btn btn-primary" style="margin-left:8px;">Join the Exchange</a></div><button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer"><svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg><svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div></nav>
+  <div class="nav-drawer" id="nav-drawer"><div class="nav-drawer-links"><a href="../index.html" class="nav-link">Home</a><a href="../for-leaders.html" class="nav-link">For Leaders</a><a href="../resources.html" class="nav-link">Resources</a><div class="nav-drawer-submenu"><a href="../resources.html#start-here" class="nav-link">Start Here</a><a href="../resources.html#governance" class="nav-link">Governance and Assurance</a><a href="../resources.html#it-digital-data" class="nav-link">IT, Digital and Data</a><a href="../resources.html#toolkits" class="nav-link">AI Toolkits and Templates</a><a href="../resources.html#tenant-ethics" class="nav-link">Tenant Impact and Ethics</a><a href="../resources.html#use-cases-benefits" class="nav-link">Role-Based AI Use Cases</a><a href="../resources.html#small-providers" class="nav-link">Small Provider Resources</a><a href="../resources.html#events-recordings" class="nav-link">Events and Recordings</a><a href="../resources.html#recommended-reading" class="nav-link">Recommended Reading</a></div><a href="../events.html" class="nav-link">Events</a><a href="../about.html" class="nav-link">About</a></div><a href="../join.html" class="btn btn-primary" style="width:100%;justify-content:center;">Join the Exchange</a></div>
+
+  <main id="main">
+    <div class="resource-page-header">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          <a href="../resources.html">Resources</a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          <span>Data Integrity: A View from the Regulator</span>
+        </div>
+        <span class="overline">Session writeup · 9 October 2026</span>
+        <h1>Data Integrity: A View from the Regulator</h1>
+        <div class="resource-meta">
+          <span class="tag tag--it">Data Integrity</span>
+          <span class="tag tag--governance">Governance</span>
+          <span class="tag">Writeup</span>
+          <span class="tag">October 2026</span>
+        </div>
+        <p style="margin-top:var(--space-4);max-width:65ch;color:var(--color-text-muted);">Amanda Hall, Assistant Director for Business Intelligence and Data Strategy and Responsible Statistician at the Regulator of Social Housing, on why data integrity is a governance problem and not just an IT one, what the regulator expects, and what it means for AI.</p>
+      </div>
+    </div>
+
+    <section class="resource-body">
+      <div class="container">
+        <div class="resource-layout">
+          <div class="resource-main">
+
+            <p class="text-lead">This was the first time the Regulator of Social Housing (RSH) had been asked to speak to the HAILIE network. Amanda's central message was simple: a clean dataset is not the same as a trustworthy one. As automation and AI shorten the distance between a data point and a decision, providers need to show that their data holds up from source to decision, and they need to tell the regulator when it does not.</p>
+
+            <div class="callout callout--info" style="margin-block:var(--space-5);">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="color:var(--color-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12v8.25z"/></svg>
+              <div>
+                <strong>Key takeaways</strong>
+                <ul class="di-takeaways">
+                  <li><strong>Quality is not integrity.</strong> Quality asks whether a value is right. Integrity asks whether you can trust the data end to end: how it connects, where it came from and who controls it.</li>
+                  <li><strong>Speed amplifies both value and error.</strong> AI and automation turn records into action before anyone challenges the evidence. If the error is built in at the start, the outcome will be flawed too, and it will arrive faster.</li>
+                  <li><strong>A new system will not fix weak data management.</strong> Without ownership, controls and a data-first culture you will "just have the same problems in a shiny new system".</li>
+                  <li><strong>Persistent, undisclosed weakness is a governance problem.</strong> The regulator's concern grows when issues repeat, controls are weak and boards cannot show their decisions rest on robust evidence.</li>
+                  <li><strong>Tell us.</strong> Disclosing a data concern early is useful intelligence. Silence lets unreliable evidence travel further.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 1 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">1. Data quality and data integrity are linked but separate</h2>
+            <p>Amanda said organisations often treat data quality as a technical exercise: correct the fields, clean the records, and that's it. That is only part of the picture. Data <strong>quality</strong> asks whether the data is fit for its immediate purpose: accurate, complete, timely, valid and consistent. "How many homes do we own?" needs an accurate, regularly updated answer.</p>
+            <p style="margin-top:var(--space-3);">Data <strong>integrity</strong> goes further. It asks whether you can trust the data from the moment it is created or acquired right through to the decision it informs. The regulator thinks about it in three dimensions:</p>
+
+            <div class="di-grid di-grid-3">
+              <div class="di-card">
+                <span class="di-card-label">Condition</span>
+                <h3>Does it meet the standard?</h3>
+                <p>Whether individual values meet agreed standards at the point they are checked. This is data quality, and it forms one part of integrity.</p>
+              </div>
+              <div class="di-card">
+                <span class="di-card-label">Connection</span>
+                <h3>Do records link correctly?</h3>
+                <p>Whether records link and keep their context, definitions and lineage. Two high-quality datasets on homes and tenants that do not link properly still leave you missing a trick.</p>
+              </div>
+              <div class="di-card">
+                <span class="di-card-label">Control</span>
+                <h3>Is change governed?</h3>
+                <p>Who can create, update or change data, how it is kept secure from corruption, how exceptions are handled, and how use is governed from definition to decision.</p>
+              </div>
+            </div>
+
+            <div class="callout callout--governance">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+              <div>
+                <strong>"A clean data set is not a high integrity data set."</strong>
+                <p>High-quality fields can still produce a low-integrity result if linkage, lineage or controls fail. Unless you understand the background, you are left with very accurate numbers and no reliable picture.</p>
+              </div>
+            </div>
+
+            <!-- 2 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">2. Why it matters more than ever</h2>
+            <p>Data used to be used once, in one spreadsheet or report. Now it is linked across systems, combined with other data, used to make investment decisions and used to give boards assurance. The chain the regulator wants to see is:</p>
+            <p class="di-chain" aria-label="Trusted data, then governed analysis, then contextual intelligence, then judgement">
+              <span>Trusted data</span><span aria-hidden="true">→</span><span>Governed analysis</span><span aria-hidden="true">→</span><span>Contextual intelligence</span><span aria-hidden="true">→</span><span>Judgement</span>
+            </p>
+            <p>The question for a dashboard is no longer "do we have a number?" It is whether you understand where that number came from, what it means, how it connects to other information, and whether you should rely on it.</p>
+            <p style="margin-top:var(--space-3);">The issues are not new. What has changed is the speed at which an organisation can move from a data point to a decision:</p>
+            <ul class="di-list">
+              <li><strong>More automated:</strong> AI and workflow tools can create patterns, recommendations and actions before anyone has challenged the underlying evidence.</li>
+              <li><strong>More connected:</strong> homes, tenants, repairs, complaints and finance are interpreted together. Individual records can look reasonable while a broken link distorts the overall judgement.</li>
+              <li><strong>Higher consequence:</strong> when evidence is reused across services, one weak record can influence many decisions and assurances.</li>
+            </ul>
+            <p>Automation does not remove the need for controls and assurance. It makes them more important. In Amanda's words: the faster the decision, the stronger the need for ownership, controls, lineage and challenge.</p>
+
+            <!-- 3 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">3. Poor data becomes poor delivery</h2>
+            <p>Amanda gave six areas where weak integrity turns directly into weak services:</p>
+            <div class="di-grid di-grid-3">
+              <div class="di-card"><h3>Safety</h3><p>Missing or incorrect property records weaken assurance that statutory checks and remedial actions are complete and done at the right time.</p></div>
+              <div class="di-card"><h3>Repairs</h3><p>Weak links between homes, tenants, complaints and works hide repeat failures and lose track of vulnerable households.</p></div>
+              <div class="di-card"><h3>Investment</h3><p>Incomplete stock condition and component data distorts priorities, costs, programmes and business plans.</p></div>
+              <div class="di-card"><h3>Rents</h3><p>Incorrect property, tenancy or rent data leads to wrong charges, lost income, inaccurate returns and unreliable planning.</p></div>
+              <div class="di-card"><h3>Fairness</h3><p>Poor tenant data limits understanding of diverse needs and whether services and outcomes are equitable.</p></div>
+              <div class="di-card"><h3>Supply</h3><p>Balancing new homes against investment in existing stock, while staying financially resilient, needs a reliable evidence base.</p></div>
+            </div>
+
+            <!-- 4 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">4. What causes poor data integrity</h2>
+            <p>The causes usually combine technology, process, accountability and capability.</p>
+            <div class="di-table-wrap">
+              <table class="di-table">
+                <thead>
+                  <tr><th scope="col">Cause</th><th scope="col">What it looks like</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Structural change</strong></td><td>Mergers and acquisitions bring different systems, definitions and histories, and ownership is unclear during transition. Risks identified before a merger are often not followed through into clean-up and lineage work afterwards.</td></tr>
+                  <tr><td><strong>Fragmented technology</strong></td><td>Multiple legacy systems, poor interoperability, manual workarounds and spreadsheets. ("We have it ourselves here. We are not immune to this at all.")</td></tr>
+                  <tr><td><strong>Weak data management</strong></td><td>Poor linkage and duplicate records, the same fields collected in different systems, late updates and stale records, limited metadata and lineage.</td></tr>
+                  <tr><td><strong>Insufficient controls</strong></td><td>Weak validation at source (date validation was a frequent example), inadequate audit checks, and errors corrected after submission or use rather than prevented.</td></tr>
+                  <tr><td><strong>Capability and culture</strong></td><td>Limited data literacy, operational teams who do not understand how their data is used downstream, and data seen as an IT issue or a form to fill in rather than a business asset.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Amanda said she sees <strong>capability and culture</strong> as probably the biggest cause, because it sits at the heart of how an organisation views data. Technology can help. Replacing a system will not, if the other things are not in place.</p>
+
+            <!-- 5 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">5. Two case studies</h2>
+            <p>Amanda presented two anonymised examples drawn from the regulator's work. The names are pseudonyms.</p>
+
+            <div class="di-case">
+              <div class="di-case-head">
+                <h3>'Lemon Homes'</h3>
+                <span class="tag tag--it">Integration and compliance issues</span>
+              </div>
+              <p class="di-case-quote">"System transformation improves insight, but assurance must keep pace with change."</p>
+              <div class="di-case-cols">
+                <div><h4>What happened</h4><ul><li>Legacy systems</li><li>Fragmented customer information</li><li>Reliance on manual workarounds</li><li>Unsuccessful fire-safety system migration</li><li>Reporting and data-quality risks</li></ul></div>
+                <div><h4>Response</h4><ul><li>New housing, asset and finance systems</li><li>CRM rollout and a single customer view</li><li>Enhanced reconciliation and triangulation of data across services</li></ul></div>
+                <div><h4>Impact</h4><ul><li>Better visibility of repairs, vulnerabilities and damp and mould</li><li>Fire-safety assurance strengthened</li><li>FRA compliance recovered</li></ul></div>
+              </div>
+              <p class="di-case-takeaway"><strong>Board takeaway:</strong> system integration is a data-quality challenge. During major technology change, boards need evidence, validation and challenge, not just dashboards.</p>
+            </div>
+
+            <div class="di-case">
+              <div class="di-case-head">
+                <h3>'Strawberry Living'</h3>
+                <span class="tag tag--governance">Self-referred key data issues</span>
+              </div>
+              <p class="di-case-quote">"Data quality treated as a strategic risk rather than an IT issue."</p>
+              <div class="di-case-cols">
+                <div><h4>What happened</h4><ul><li>TSM and rent-setting inaccuracies found during a transformation programme</li><li>Data governance recognised as a significant organisational risk, not just an IT issue</li></ul></div>
+                <div><h4>Response</h4><ul><li>Cloud-based platforms</li><li>Stronger migration controls</li><li>External validation</li><li>Enhanced governance and lineage work</li><li>Transparent self-referral to the regulator</li></ul></div>
+                <div><h4>Impact</h4><ul><li>Data-led operating model</li><li>Greater confidence in regulatory returns</li><li>Improved customer insight and asset planning</li><li>Stronger board assurance</li></ul></div>
+              </div>
+              <p class="di-case-takeaway"><strong>Board takeaway:</strong> the strongest organisations find problems early, disclose them openly and use governance frameworks to drive lasting improvement.</p>
+            </div>
+
+            <!-- 6 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">6. The cost to regulation and to the sector</h2>
+            <p>When returns arrive at the regulator they go through cleaning, queries, reconciliation and engagement, often over several rounds. Amanda said that, repeatedly, what looks like a possible compliance issue turns out to be a data quality or integrity issue. That costs regulatory time and slows down prioritisation, intervention and assurance. Providers that understand their own lineage and governance get issues resolved faster.</p>
+            <p style="margin-top:var(--space-3);">The damage also spreads beyond one provider. Unreliable data creates a chain of false confidence:</p>
+            <ol class="di-steps">
+              <li><strong>Incorrect evidence:</strong> different methods, incomplete scope or an uncorrected error.</li>
+              <li><strong>Distorted benchmarking:</strong> peers compare themselves against a number that is not like-for-like.</li>
+              <li><strong>Misallocated action:</strong> targets, investment or scrutiny are aimed at the wrong issue.</li>
+              <li><strong>Poor delivery and loss of trust:</strong> tenants, providers and investors question published insight and regulatory judgement.</li>
+            </ol>
+
+            <!-- 7 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">7. What the regulator expects</h2>
+            <p>Continued poor quality and a lack of end-to-end integrity is "not simply a data problem, it's a governance problem". The regulator expects providers to:</p>
+            <div class="di-grid di-grid-4">
+              <div class="di-card"><span class="di-card-label">1</span><h3>Identify weaknesses</h3><p>Which data is incomplete, inaccurate, inconsistent, poorly linked or poorly understood?</p></div>
+              <div class="di-card"><span class="di-card-label">2</span><h3>Assess decision risk</h3><p>Which services, safety controls, financial choices or assurances depend on it?</p></div>
+              <div class="di-card"><span class="di-card-label">3</span><h3>Govern use</h3><p>Apply ownership, thresholds, challenge, disclosure and proportionate safeguards. Continuously, not once.</p></div>
+              <div class="di-card"><span class="di-card-label">4</span><h3>Fix and assure</h3><p>Address root causes, verify remediation and evidence that controls stay effective.</p></div>
+            </div>
+            <p>On ownership, Amanda was specific: name senior people responsible for particular data rather than "we own it corporately", plan for what happens when a data owner leaves, and rationalise data points that have no owner and no use. A data quality programme corrects individual records. A governance response improves integrity.</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-5) 0 var(--space-2);font-size:var(--text-h4);">When the regulator's concern increases</h3>
+            <p>Not every data error carries the same weight. Concern grows when these features come together:</p>
+            <ul class="di-list">
+              <li><strong>Repeated weakness:</strong> the same issues recur across returns, operational systems or board reporting, suggesting root causes are not being addressed.</li>
+              <li><strong>Weak control environment:</strong> ownership is unclear, checks are absent, audit findings stay open, or improvements are not sustained.</li>
+              <li><strong>Unreliable assurance:</strong> the board cannot show that decisions and claims are based on robust, comprehensive evidence.</li>
+            </ul>
+            <p>Concern is highest when weaknesses are persistent, widespread, known but unresolved, undisclosed, and disconnected from credible executive and board oversight.</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-5) 0 var(--space-2);font-size:var(--text-h4);">The data integrity cycle</h3>
+            <p>Amanda shared the cycle the regulator is using to improve its own data integrity:</p>
+            <ol class="di-cycle">
+              <li><strong>Know</strong><span>your information and where weaknesses exist.</span></li>
+              <li><strong>Own</strong><span>the data and the associated risk, with named senior owners.</span></li>
+              <li><strong>Control</strong><span>creation, amendment and use. Understand lineage and keep it secure.</span></li>
+              <li><strong>Assure</strong><span>the organisation that controls are effective, and test them.</span></li>
+              <li><strong>Disclose</strong><span>material weaknesses and limitations to your board and to the regulator.</span></li>
+              <li><strong>Improve</strong><span>the underlying systems and processes, then start again.</span></li>
+            </ol>
+
+            <!-- 8 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">8. "Tell us"</h2>
+            <p>Amanda's closing message: tell the regulator if you have a data concern, if you have made an error in a return, or if data quality or integrity problems have affected decision-making. A data concern is useful intelligence in itself. Early disclosure helps the regulator tell the difference between:</p>
+            <ul class="di-list">
+              <li>a known, controlled weakness</li>
+              <li>a capability or systems problem</li>
+              <li>a failure of oversight or assurance</li>
+              <li>a potential underlying delivery concern.</li>
+            </ul>
+            <div class="di-grid di-grid-3">
+              <div class="di-card"><h3>What to disclose</h3><p>Known gaps, limitations, methodology changes, exclusions, estimates, control failures and remediation plans.</p></div>
+              <div class="di-card"><h3>Why it matters</h3><p>The regulator can interpret evidence proportionately, avoid false conclusions and focus where confidence is lowest.</p></div>
+              <div class="di-card"><h3>What good looks like</h3><p>Clear ownership, impact assessment, credible timescales, independent challenge and evidence that fixes are sustained.</p></div>
+            </div>
+            <div class="callout callout--risk">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+              <div>
+                <strong>Transparency allows uncertainty to be managed. Silence allows unreliable evidence to travel further.</strong>
+                <p>Disclosure does not remove the need to fix the problem. But providers who know their weaknesses and are working on them are the ones the regulator wants to support. What is more concerning is those who are hiding things.</p>
+              </div>
+            </div>
+
+            <!-- 9 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">9. From the Q&amp;A</h2>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">How do we give our board assurance on data integrity?</h3>
+            <p>Amanda acknowledged this is hard: it is easy to say data is accurate if you don't understand what is wrong with it. Her advice:</p>
+            <ul class="di-list">
+              <li>Change how data is presented. Boards see numbers on dashboards without knowing what sits behind them. Where you know a data point is weak, new or in a pilot phase, say so.</li>
+              <li>Have an open discussion about <em>how</em> you govern data, not just "we've got this". How are data owners defined? How are senior teams made responsible for quality and control?</li>
+              <li>Map your data flows, at least as evidence for yourselves. Where are the flash points where data is likely to be mismanaged, mismatched or corrupted? Make sure the board knows that work is happening and is continuous.</li>
+            </ul>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">Will the regulator set data standards and definitions?</h3>
+            <p>Attendees raised the risk of benchmarking errors when definitions differ, and asked whether the sector should adopt its own data standards. Amanda said Tenant Satisfaction Measures are far better defined, and comparability features in the regulator's recent discussion document on data-driven regulation. After a decade of co-regulation the regulator has stepped back from being prescriptive and is now weighing that balance. She could not promise a set of data standards covering everything the regulator collects. Sector-led standards are a live discussion, and the regulator is looking at existing standards and adoption across the sector. What she could say is that it is thinking about how to support a consistent understanding across the sector.</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">What about providers rushing into AI on poor data?</h3>
+            <p>The concern is the same as for poor data integrity generally, but the risk of a downstream problem is growing. AI, automation and advanced modelling, especially in black-box scenarios, amplify that risk. "AI is linking stuff really quickly and if you haven't got those linkages correct AI is not going to know that." Amanda said the regulator has seen this itself: AI assistant outputs that looked wrong turned out to reflect unclear source information.</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">Smaller providers and frontline culture</h3>
+            <p>A smaller provider (around 2,000 homes) described limited administrative capacity and a culture that rightly values people skills over data tasks. Amanda said the regulator is going through the same shift. Digital and data have been "in a cupboard down the corridor for years". Her aim is to put them in the middle of the open-plan office as enablers for the whole business, and to build data literacy from the basics, such as how to read and present a chart. That matters more as AI produces outputs faster.</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">What if regulatory metrics don't fit how we deliver?</h3>
+            <p>One provider explained that its same-day repairs service does not fit neatly into regulatory reporting boxes. Amanda's response: come and talk to us. The regulator needs a core set of comparable metrics but wants to understand their limitations, whether that means changing a definition, an explicit exclusion or, reluctantly, another metric. "The last thing the regulator wants to do is stifle innovation."</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">Is the regulator optimistic or pessimistic about AI?</h3>
+            <p>"It depends on what day you ask me." AI could be revolutionary for the sector, and there will be growing expectations to generate value from new technology. The worries are bias in AI models, unverified assumptions and the amplification of poor data integrity. Her challenge to everyone, the regulator included: AI needs to be the appropriate solution to the problem you are trying to solve, not a catch-all remedy.</p>
+
+            <h3 style="color:var(--color-secondary);margin:var(--space-4) 0 var(--space-2);font-size:var(--text-h4);">Will the regulator take a position on AI?</h3>
+            <p>Amanda could not give a definitive answer while the regulator reviews its future approach and government expectations develop. For now, its view of AI is outcome-focused and technology-agnostic. If providers can show that AI results are fair, proportionate and improve outcomes for tenants, investment and supply, the regulator is comfortable, in the same way it does not dictate staffing levels or technology choices. Providers are expected to deliver the same quality of service and fair treatment of tenants through AI as through any other means.</p>
+
+            <!-- 10 -->
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">What this means for AI in housing</h2>
+            <p>HAILIE's reading of the session, for teams planning or running AI work:</p>
+            <ul class="di-list">
+              <li><strong>Put an integrity check in every AI business case.</strong> Before automating, ask which records the tool will link and whether those links are reliable. The <a href="experiment-template.html">AI Experiment Template</a> and <a href="dpia-template.html">DPIA template</a> are good places to record this.</li>
+              <li><strong>Know the lineage of what you feed the model.</strong> If you cannot say where an input came from and who owns it, the output inherits that uncertainty, faster.</li>
+              <li><strong>Keep a human challenge step</strong> where outputs feed decisions about safety, rent or vulnerable households.</li>
+              <li><strong>Be ready to evidence outcomes.</strong> The regulator will judge AI by whether results are fair and proportionate and improve outcomes, so measure that from the start.</li>
+            </ul>
+
+            <div style="margin-top:var(--space-6);padding:var(--space-5);background:var(--color-bg-soft);border-radius:10px;">
+              <h3 style="color:var(--color-primary);margin-bottom:var(--space-3);">Questions to take to your board or executive team</h3>
+              <ol class="di-questions">
+                <li>Which of our decisions on safety, rents, repairs and investment rely on data we know is weak, and does the board know which ones?</li>
+                <li>Does every critical data set have a named senior owner, and what happens when they leave?</li>
+                <li>Where are the flash points in our data flows: migrations, manual workarounds, spreadsheets and system boundaries?</li>
+                <li>Are we fixing records or fixing root causes? Which issues have recurred across more than one return?</li>
+                <li>Have we disclosed known data weaknesses, errors in returns and remediation plans to the regulator?</li>
+                <li>Before we automate or apply AI to a process, have we checked the linkage and lineage of the data it depends on?</li>
+              </ol>
+              <p style="margin-top:var(--space-4);">Use these alongside the <a href="board-checklist.html">Board-Ready AI Assurance Checklist</a>.</p>
+            </div>
+
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">Next steps from the session</h2>
+            <ul class="di-list">
+              <li><strong>Disclose data concerns:</strong> tell the regulator about data concerns, errors in returns, or cases where integrity issues affected decisions.</li>
+              <li><strong>Explain metric limitations:</strong> where regulatory metrics do not capture how you deliver, such as same-day repairs, explain why to the regulator.</li>
+              <li><strong>Keep the dialogue going:</strong> the regulator is reviewing sector feedback from its recent consultations and wants to keep talking with data practitioners through HAILIE, HACT and other industry bodies.</li>
+            </ul>
+
+            <h2 style="color:var(--color-primary);margin:var(--space-6) 0 var(--space-3);">Sources and contact</h2>
+            <ul class="di-list">
+              <li>Amanda Hall, <em>Data Quality and Integrity: It's not just an IT problem</em>, Regulator of Social Housing, presentation to HAILIE, 9 October 2026.</li>
+              <li><a href="https://www.gov.uk/government/organisations/regulator-of-social-housing" target="_blank" rel="noopener">Regulator of Social Housing on GOV.UK</a></li>
+              <li>To contact the regulator about a data concern: <a href="mailto:enquiries@rsh.gov.uk">enquiries@rsh.gov.uk</a> or 0300 124 5225.</li>
+            </ul>
+            <p style="margin-top:var(--space-4);font-size:var(--text-sm);color:var(--color-text-muted);">This writeup is HAILIE's summary of the talk and Q&amp;A, prepared from the slides and session notes. It is not an official statement of regulatory policy. The section "What this means for AI in housing" and the board questions are HAILIE's own suggestions.</p>
+
+          </div>
+          <aside class="resource-sidebar">
+            <div class="sidebar-card"><h4>At a glance</h4><ul class="di-glance"><li><strong>Speaker</strong>Amanda Hall, Regulator of Social Housing</li><li><strong>Date</strong>9 October 2026</li><li><strong>For</strong>Boards, CEOs, data and IT leads, governance and compliance teams</li></ul></div>
+            <div class="sidebar-card"><h4>Related resources</h4><ul><li><a href="board-checklist.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Board Assurance Checklist</a></li><li><a href="it-director-guide.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>AI for IT Directors</a></li><li><a href="tsm-insights.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>HAILIE TSM Insights Dashboard</a></li><li><a href="small-provider-tips.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Small Provider Tips</a></li><li><a href="../events.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>Events and recordings</a></li></ul></div>
+            <div class="sidebar-card" style="background:var(--color-primary);border-color:var(--color-primary);"><h4 style="color:rgba(255,255,255,0.7);">Join the Exchange</h4><p style="font-size:var(--text-sm);color:rgba(255,255,255,0.85);margin-bottom:var(--space-4);">Practical guidance and peer learning for housing leaders. Free.</p><a href="../join.html" class="btn btn-white" style="width:100%;justify-content:center;font-size:var(--text-sm);">Join HAILIE</a></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo"><div class="container"><div class="footer-inner"><div class="footer-brand"><a href="../index.html" class="footer-logo"><img src="../Images/hailie-logo-small.png" alt="HAILIE"><span class="footer-logo-text">HAILIE</span></a><p class="footer-description">Housing AI Leadership &amp; Implementation Exchange — independent, vendor-neutral, built for housing.</p></div><nav class="footer-nav"><h4>Pages</h4><ul><li><a href="../index.html">Home</a></li><li><a href="../for-leaders.html">For Leaders</a></li><li><a href="../resources.html">Resources</a></li><li><a href="../events.html">Events</a></li><li><a href="../about.html">About</a></li><li><a href="../join.html">Join</a></li></ul></nav><div class="footer-contact"><h4 style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.5);margin-bottom:var(--space-4);">Contact</h4><p>Questions or contributions:<br><a href="mailto:guy@housingai.org">guy@housingai.org</a></p><p style="margin-top:var(--space-4);">Follow us on LinkedIn: <a href="https://www.linkedin.com/company/hailie-housing-ai/" target="_blank" rel="noopener">Hailie Housing AI</a></p></div></div><div class="footer-bottom"><p class="footer-tagline">Independent. Not-for-Profit. Built for housing.</p><p class="footer-legal">&copy; 2026 HAILIE. Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.5);">CC BY-SA 4.0</a> · <a href="../privacy.html" style="color:rgba(255,255,255,0.5);">Privacy Notice</a></p></div></div></footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>
