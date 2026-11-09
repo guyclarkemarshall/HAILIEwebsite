@@ -365,7 +365,7 @@
       'application/msword',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     ];
-    const contactEmail = 'guy@housingai.org';
+    const contactEmail = 'hailie@fuza.co.uk';
     const mailtoHref = 'mailto:' + contactEmail + '?subject=' + encodeURIComponent('HAILIE document submission');
 
     const endpointConfigured = () => {
