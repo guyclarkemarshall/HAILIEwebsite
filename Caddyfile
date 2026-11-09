@@ -5,8 +5,13 @@
 }
 
 :{$PORT} {
+    # Document submissions go to the separate "submissions" service on
+    # Railway's private network (see submissions/README.md)
+    handle /api/* {
+        reverse_proxy {$SUBMISSIONS_UPSTREAM:submissions.railway.internal:8080}
+    }
+
     root * /app
-    file_server
 
     # Enable compression (gzip & zstd)
     encode gzip zstd
@@ -16,8 +21,11 @@
     redir /ai-for-better-housing-hackathon-pilot-facilitator-guide* /resources/hackathon-facilitator-guide.html permanent
     redir /ai-for-better-housing-hackathon-pilot-tenant-participation-pack* /resources/hackathon-tenant-participation-pack.html permanent
 
-    # Try files for clean URLs (e.g. /about maps to /about.html)
-    try_files {path} {path}.html {path}/index.html =404
+    # Everything else is the static site. Clean URLs: /about maps to /about.html
+    handle {
+        try_files {path} {path}.html {path}/index.html =404
+        file_server
+    }
 
     # Security headers
     header {

@@ -1,0 +1,14 @@
+{
+  "name": "hailie-submissions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Receives HAILIE document submissions and saves them to SharePoint",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
