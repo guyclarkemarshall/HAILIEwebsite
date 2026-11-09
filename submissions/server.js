@@ -267,7 +267,7 @@ async function handleSubmission(p) {
   const item = await uploadFile(`${CONFIG.folder}/${subFolder}/${fileName}`, bytes);
   const fileUrl = item && item.webUrl ? item.webUrl : '';
   const savedName = item && item.name ? item.name : fileName;
-  const sizeKb = Math.round(bytes.length / 1024);
+  const sizeKb = Math.max(1, Math.round(bytes.length / 1024));
 
   // 2. Log it. The file is already safe, so a logging failure is reported
   //    in the notification email rather than failing the submission.
