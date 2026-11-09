@@ -1,0 +1,84 @@
+{
+  "displayName": "Document submissions log",
+  "list": {
+    "template": "genericList"
+  },
+  "columns": [
+    {
+      "name": "SubmittedBy",
+      "displayName": "Submitted by",
+      "text": {}
+    },
+    {
+      "name": "Email",
+      "displayName": "Email",
+      "text": {}
+    },
+    {
+      "name": "Organisation",
+      "displayName": "Organisation",
+      "text": {}
+    },
+    {
+      "name": "Role",
+      "displayName": "Role",
+      "text": {}
+    },
+    {
+      "name": "DocumentType",
+      "displayName": "Document type",
+      "text": {}
+    },
+    {
+      "name": "DocumentStatus",
+      "displayName": "Status",
+      "text": {}
+    },
+    {
+      "name": "Description",
+      "displayName": "Description",
+      "text": {
+        "allowMultipleLines": true
+      }
+    },
+    {
+      "name": "Permission",
+      "displayName": "Permission",
+      "text": {}
+    },
+    {
+      "name": "Conditions",
+      "displayName": "Conditions",
+      "text": {
+        "allowMultipleLines": true
+      }
+    },
+    {
+      "name": "AuthorityConfirmed",
+      "displayName": "Authority confirmed",
+      "text": {}
+    },
+    {
+      "name": "PrivacyConfirmed",
+      "displayName": "Privacy confirmed",
+      "text": {}
+    },
+    {
+      "name": "FileName",
+      "displayName": "File name",
+      "text": {}
+    },
+    {
+      "name": "FileSizeKB",
+      "displayName": "File size (KB)",
+      "number": {}
+    },
+    {
+      "name": "FileLink",
+      "displayName": "File link",
+      "text": {
+        "allowMultipleLines": true
+      }
+    }
+  ]
+}
