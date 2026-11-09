@@ -365,17 +365,17 @@
       'application/msword',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     ];
-    const contactEmail = 'guy@housingai.org';
+    const contactEmail = 'hailie@fuza.co.uk';
     const mailtoHref = 'mailto:' + contactEmail + '?subject=' + encodeURIComponent('HAILIE document submission');
 
     const endpointConfigured = () => {
       const action = docForm.getAttribute('action') || '';
-      return /^https?:\/\//.test(action) && !/YOUR_DEPLOYMENT_ID/i.test(action);
+      return /^(https?:\/\/|\/)/.test(action) && !/YOUR_DEPLOYMENT_ID/i.test(action);
     };
 
     /* Read the chosen file as base64 so it can travel inside a JSON body.
-       The Google Apps Script receiver (apps-script/Code.gs) decodes it and
-       saves it to Drive. */
+       The submissions service (submissions/server.js) decodes it and
+       saves it to SharePoint. */
     const readFileAsBase64 = (file) => new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -596,11 +596,11 @@
           data: await readFileAsBase64(file),
         };
 
-        /* Sent as text/plain (the fetch default for a string body) on purpose:
-           Apps Script web apps do not answer CORS preflight requests, and a
-           plain-text POST needs none. */
+        /* Same-origin POST to /api/submit, which Caddy forwards to the
+           submissions service. */
         const response = await fetch(docForm.action, {
           method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
 
