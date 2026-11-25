@@ -45,14 +45,14 @@ test.before(() => new Promise((r) => server.listen(0, '127.0.0.1', () => { port 
 test.after(() => server.close());
 
 const post = (body, headers = {}) => realFetch(`http://127.0.0.1:${port}/api/submit`, {
-  method: 'POST', body: JSON.stringify(body), headers: { Origin: 'https://housingai.org', ...headers },
+  method: 'POST', body: JSON.stringify(body), headers: { Origin: 'https://hailienetwork.org', ...headers },
 }).then(async (r) => ({ status: r.status, cors: r.headers.get('access-control-allow-origin'), json: await r.json() }));
 
 test('valid submission saves, logs and emails', async () => {
   calls.length = 0;
   const r = await post({ ...base, file: { name: 'policy.pdf', data: pdf.toString('base64') } });
   assert.deepStrictEqual(r.json, { ok: true });
-  assert.strictEqual(r.cors, 'https://housingai.org');
+  assert.strictEqual(r.cors, 'https://hailienetwork.org');
   const upload = calls.find((c) => c.url.includes('/content?'));
   assert.match(decodeURIComponent(upload.url), /Document submissions\/2 - Publish anonymised \(needs sign-off\)\/\d{4}-\d{2}-\d{2} - Example HA - policy\.pdf/);
   assert.ok(calls.some((c) => c.url.endsWith('/sites/site1/lists') && c.method === 'POST'), 'list created');

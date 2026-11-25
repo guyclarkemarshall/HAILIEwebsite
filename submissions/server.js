@@ -32,7 +32,7 @@ const CONFIG = {
   sender: process.env.MAIL_SENDER || 'hailie@fuza.co.uk',
   notifyEmail: process.env.NOTIFY_EMAIL || 'guy@fuza.co.uk',
   sendAcknowledgement: process.env.SEND_ACKNOWLEDGEMENT !== 'false',
-  allowedOrigins: (process.env.ALLOWED_ORIGINS || 'https://housingai.org,https://www.housingai.org')
+  allowedOrigins: (process.env.ALLOWED_ORIGINS || 'https://hailienetwork.org,https://www.hailienetwork.org,https://housingai.org,https://www.housingai.org')
     .split(',').map((s) => s.trim()).filter(Boolean),
   maxFileBytes: 10 * 1024 * 1024,
   // A base64 file of 10 MB plus the other fields fits comfortably in 15 MB
@@ -307,7 +307,7 @@ async function handleSubmission(p) {
       replyTo: fields.email,
       subject: `HAILIE document submission: ${fields.title}`,
       body:
-        'A new document has been submitted via housingai.org.\n\n' +
+        'A new document has been submitted via hailienetwork.org.\n\n' +
         `Title:        ${fields.title}\n` +
         `Type:         ${fields.type}${fields.status ? ` (${fields.status})` : ''}\n` +
         `From:         ${fields.name}${fields.role ? `, ${fields.role}` : ''}\n` +
@@ -336,7 +336,7 @@ async function handleSubmission(p) {
           '\nA HAILIE volunteer will review it and be in touch. If you want to change ' +
           'how the document is used, or withdraw it, reply to this email.\n\n' +
           'HAILIE — Housing AI Leadership & Implementation Exchange\n' +
-          'https://housingai.org\n',
+          'https://hailienetwork.org\n',
       });
     } catch (err) {
       console.error('Acknowledgement email failed:', err.message || err);
