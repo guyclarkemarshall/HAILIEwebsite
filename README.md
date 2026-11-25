@@ -1,6 +1,6 @@
 # HAILIE — Housing AI Leadership & Implementation Exchange
 
-This repository contains the static website codebase for HAILIE ([housingai.org](https://housingai.org)). 
+This repository contains the static website codebase for HAILIE ([hailienetwork.org](https://hailienetwork.org)). 
 
 HAILIE is an independent, vendor-neutral community for social housing leaders using Artificial Intelligence responsibly. It brings CEOs, boards, IT and digital teams, and senior service leaders together to share practical guidance, peer learning, and events.
 

@@ -5,6 +5,10 @@
 }
 
 :{$PORT} {
+    # hailienetwork.org is the main domain; send the old one there
+    @legacy_domain host housingai.org www.housingai.org
+    redir @legacy_domain https://hailienetwork.org{uri} permanent
+
     # Document submissions go to the separate "submissions" service on
     # Railway's private network (see submissions/README.md)
     handle /api/* {

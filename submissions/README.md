@@ -11,7 +11,7 @@ It replaces the Google Apps Script that used to do this (it saved to Google Driv
 ## How it fits together
 
 ```
-browser ──POST /api/submit──▶ housingai.org (Caddy, "web" service)
+browser ──POST /api/submit──▶ hailienetwork.org (Caddy, "web" service)
                                     │ reverse proxy, Railway private network
                                     ▼
                          submissions.railway.internal:8080 (this service)
@@ -84,4 +84,4 @@ Test-ServicePrincipalAuthorization -Identity <CLIENT ID> -Resource hailie@fuza.c
 ```
 
 ### 5. Railway
-Set the three `AZURE_*` variables on the "submissions" service, then check `https://housingai.org/api/health?deep=1`.
+Set the three `AZURE_*` variables on the "submissions" service, then check `https://hailienetwork.org/api/health?deep=1`.
